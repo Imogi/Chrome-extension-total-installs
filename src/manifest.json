@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Total Chrome installs",
+  "version": "1.0.0",
+  "action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "24": "images/icon24.png",
+      "32": "images/icon32.png"
+    },
+    "default_title": "Click Me",
+    "default_popup": "./App/pages/default-popup.html"
+  },
+  "default_locale": "en",
+  "description": "Total Chrome installs enables chrome extensions developers to check their TOTAL amount of installations amongst other visualiser features",
+  "background": {
+    "service_worker": "background.js"
+  }
+}
