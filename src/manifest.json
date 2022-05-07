@@ -4,12 +4,18 @@
   "version": "1.0.0",
   "action": {
     "default_icon": {
-      "16": "images/icon16.png",
-      "24": "images/icon24.png",
-      "32": "images/icon32.png"
+      "16": "./App/assets/icons/logo.png",
+      "24": "./App/assets/icons/logo.png",
+      "32": "./App/assets/icons/logo.png"
     },
-    "default_title": "Click Me",
+    "default_title": "Chrome extension statistics",
     "default_popup": "./App/pages/default-popup.html"
+  },
+  "icons": {
+    "16": "./App/assets/icons/logo.png",
+    "32": "./App/assets/icons/logo.png",
+    "48": "./App/assets/icons/icon48.png",
+    "128": "./App/assets/icons/icon48.png"
   },
   "default_locale": "en",
   "description": "Total Chrome installs enables chrome extensions developers to check their TOTAL amount of installations amongst other visualiser features",
