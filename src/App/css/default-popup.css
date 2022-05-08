@@ -5,7 +5,11 @@ body, section {
 }
 
 .container-fluid{
-	background-color: #45336f !important;
+	background-color: #fbfbfb !important;
 	width: 100%;
 	height: 100%;
+}
+
+#signin-container{
+	background-color: beige !important;
 }
