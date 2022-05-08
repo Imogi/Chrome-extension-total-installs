@@ -11,36 +11,71 @@
       rel="stylesheet"
     />
   </head>
+  
+  <!-- Navigation bar -->
   <body>
-    <!-- Navigation bar -->
-    <nav class="navbar navbar-default" style="background-color: #45336f">
-      <a class="nav-item nav-link">
-        <img
-          src="/App/assets/icons/logo.svg"
-          width="45"
-          height="45"
-          alt="logo"
-        />
-      </a>
-      <a class="nav-item nav-link" id="home-nav-btn">Home</a>
-      <a class="nav-item nav-link" id="visualiser-nav-btn">Visualisers</a>
-      <a class="nav-item nav-link" id="database-nav-btn">Database</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      
+      <div class="container-fluid">
+        <a class="nav-item nav-link">
+          <img
+            src="/App/assets/icons/logo.svg"
+            width="45"
+            height="45"
+            alt="logo"
+          />
+        </a>
+
+        <a class="navbar-brand" id="home-nav-btn" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16" style="font-size: 2rem; color: cornflowerblue;">
+            <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+            <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+          </svg>
+          Home
+        </a>
+
+        <a class="navbar-brand" id="visualiser-nav-btn" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pie-chart-fill" viewBox="0 0 16 16" style="font-size: 2rem; color: cornflowerblue;">>
+            <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"/>
+          </svg>
+          Visualiser
+        </a>
+
+        <a class="navbar-brand" id="database-nav-btn" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-data" viewBox="0 0 16 16" style="font-size: 2rem; color: cornflowerblue;">
+            <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
+            <path d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"/>
+            <path d="M10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7Zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1Zm4-3a1 1 0 0 0-1 1v3a1 1 0 1 0 2 0V9a1 1 0 0 0-1-1Z"/>
+          </svg>
+          Database
+        </a>
+      </div>
     </nav>
   </body>
   <!-- Home screen, i.e upload csv file for total downloads -->
-  <div class="container-fluid" id="home-container"></div>
+  <div class="container-fluid" id="home-container">
+    <button type="button" class="btn btn-dark">Dark</button>
+  </div>
   <!-- Visualiser container -->
   <div class="container-fluid" id="visualiser-container" style="display: none">
-    <button type="button" id="btn" class="btn btn-primary">Upload CSV</button>
+    
+  <div class="d-grid gap-2">
+    <button class="btn btn-primary" type="button">Upload csv no. Installs</button>
+    <button class="btn btn-primary" type="button">Upload csv All Countries</button>
   </div>
+
+
   <!-- Database container, i.e the leaderboard -->
   <div class="container-fluid" id="database-container" style="display: none">
     <div>
       <button type="button" id="btn" class="btn btn-primary">
-        leaderboard
+        leaderboard - wow
       </button>
+      <button type="button" id="btn" class="btn btn-primary">Yes</button>
     </div>
   </div>
+  
   <!-- JavaScript -->
   <script src="/App/javascript/default-popup.js"></script>
+
 </html>
