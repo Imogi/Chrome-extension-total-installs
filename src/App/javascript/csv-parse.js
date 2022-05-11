@@ -2,6 +2,7 @@
 
 document.querySelector('#submit-installations').addEventListener('click', function () {
     const csvFile = document.getElementById("installations-file");
+    
     //alert("Hello! I am an alert box!!");
     //alert(csvFile.files[0].filename);
 
@@ -33,29 +34,21 @@ document.querySelector('#submit-installations').addEventListener('click', functi
         return arr;
     }
     
-    
-    const input = csvFile.files[0];
+    const ac = (document.querySelector('#visualiser-container'));
+    const file = csvFile.files[0];
+
     const reader = new FileReader();
-    const ac = document.getElementById("visualiser-container");
-    console.log("acccccc");
 
-    // reader.onload = function (e) {
-    //   const text = e.target.result;
-    //   const data = csvToArray(text);
-    //   document.write(JSON.stringify(data));
-    //   console.log(JSON.stringify(data));
+    reader.addEventListener("load", () => {
+      // this will then display a text file
+      const result = document.createTextNode(reader.result)
+      ac.appendChild(result);
+    }, false);
+    
 
-    //   const node = document.createTextNode(input);
-      
-      
-    //   console.log(ac);
-    //   ac.appendChild(node);
-    // };
-    // const ac = document.getElementById("visualiser-container");
-    // ac.appendChild(input);
-
-    const data = csvToArray(text);
-    reader.readAsText(input);
+    if(file){
+      reader.readAsText(file);
+    }
 });
 
 
