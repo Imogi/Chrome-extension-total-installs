@@ -61,11 +61,35 @@
   </div>
   <!-- Visualiser container -->
   <div class="container-fluid" id="visualiser-container" style="display: none">
-    
-  <div class="d-grid gap-2">
-    <button class="btn btn-primary" type="button">Upload csv no. Installs</button>
-    <button class="btn btn-primary" type="button">Upload csv All Countries</button>
+
+
+    <div class="d-grid gap-2">
+      <button class="btn btn-outline-primary" id="csv-installs-button-click" type="button" >Upload csv no. Installs </button>
+      
+      <div class="input-group">
+        <input type="file" accept=".csv" class="form-control" id="installations-file" >
+        <!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" -->
+        <button class="btn btn-outline-secondary" type="button" id="submit-installations">Visualise</button>
+      </div>
+      
+      <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button">Upload csv All Countries</button>
+      
+      
+      <div class="input-group">
+        <input type="file" accept=".csv" class="form-control" id="countries-file" >
+        <!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" -->
+        <button class="btn btn-outline-secondary" type="button" id="submit-countries">Visualise</button>
+      </div>
+    </div>
+
+
+
   </div>
+  
+
+
+
+  
 
 
   <!-- Database container, i.e the leaderboard -->
@@ -80,5 +104,5 @@
   
   <!-- JavaScript -->
   <script src="/App/javascript/default-popup.js"></script>
-
+  <script src="/App/javascript/csv-parse.js"></script>
 </html>

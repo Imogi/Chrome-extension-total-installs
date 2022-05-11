@@ -18,3 +18,4 @@ document.querySelector('#database-nav-btn').addEventListener('click', function (
   document.getElementById('database-container').style.display = 'block';
   document.getElementById('visualiser-container').style.display = 'none';
 });
+
