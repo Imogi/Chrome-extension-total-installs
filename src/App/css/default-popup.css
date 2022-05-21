@@ -18,3 +18,117 @@ body, section {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+
+/*
+	CSS for total install upload page
+*/
+#home-container{
+	background-color: rgb(255, 255, 255) !important;
+}
+#Total-installs-container{
+	width: 100%;
+	height: 80%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#Total-installs-container:hover{
+	cursor: pointer;
+}
+
+#logo-behind{
+	position: absolute; 
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+}
+#Total-installs-total-div{
+	text-align: center; 
+}
+
+#Total-installs-button{
+	width: 60%;
+	height: 90%;
+	background: rgba(0, 0, 0, 0.28);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	border-style: solid white 2px;
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	animation: pulse 2.5s infinite;
+	font-size: 2rem;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(0.99);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
+  }
+  
+  100% {
+    transform: scale(0.99);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+#Total-installs-button-header{
+	font-size: 1.5rem;
+	color: rgb(0, 0, 0);
+	text-align: center;
+	padding: 1rem;
+}
+
+/* Lines */
+.line{
+	position: absolute;
+	width: 120px;
+	height: 11px;
+	background-color: rgb(255, 255, 255);
+	z-index: 10;
+	border-radius: 15px;
+	display: none;
+}
+.line1{
+	transform: rotate(330deg);
+	top: 48%;
+	left: 35%;
+	background-color: #0b9e58;
+}
+.line2{
+	transform: rotate(90deg);
+	top:65%;
+	left:26.5%;
+	background-color: #0b9e58;
+}
+.line3{
+	transform: rotate(330deg);
+	top: 70%;
+	left: 35%;
+	background-color: #547ebf;
+}
+.line4{
+	transform: rotate(330deg);
+	top: 53%;
+	right: 35%;
+	background-color: #fecd43;
+}
+.line5{
+	transform: rotate(330deg);
+	top: 76%;
+	right: 35%;
+	background-color: #e83a60;
+}
+.line6{
+	transform: rotate(90deg);
+	top:58%;
+	right:26.5%;
+	background-color: #e83a60;
+}
