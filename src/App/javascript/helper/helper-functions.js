@@ -12,6 +12,6 @@ export function alertTimeout(id){
     After a period hide alert
   */
   setTimeout(() => {
-    document.getElementById(id).style.display = 'none';
+    document.getElementById(id).style.opacity = 0;
   }, 3000)
 }

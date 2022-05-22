@@ -2,6 +2,7 @@ body, section {
 	width: 540px;
 	height: 400px;
 	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 .container-fluid{
@@ -31,8 +32,7 @@ body, section {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-#Total-installs-container:hover{
+	transition: all 1s ease-out;
 	cursor: pointer;
 }
 
@@ -59,7 +59,7 @@ body, section {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	animation: pulse 2.5s infinite;
+	animation: pulse 2.1s infinite;
 	font-size: 2rem;
 }
 @keyframes pulse {
@@ -86,49 +86,141 @@ body, section {
 	padding: 1rem;
 }
 
+#Total-installs-total-div{
+	position: fixed;
+	left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+	top: 50%;
+	width: 50%;
+}
+
 /* Lines */
 .line{
 	position: absolute;
 	width: 120px;
 	height: 11px;
 	background-color: rgb(255, 255, 255);
-	z-index: 10;
+	z-index: 9;
 	border-radius: 15px;
-	display: none;
+	opacity: 0;
+	max-height: 0;
 }
 .line1{
 	transform: rotate(330deg);
-	top: 48%;
+	top: 43.1%;
 	left: 35%;
 	background-color: #0b9e58;
+}
+.lineAnimation1{
+	animation: slide1 1s;
+	animation-fill-mode: forwards;
+}
+@keyframes slide1 {
+	to {
+		width: 150px;
+		transform: rotate(180deg);
+		left: 25%;
+		border-radius: 0px;
+	}
 }
 .line2{
 	transform: rotate(90deg);
-	top:65%;
+	top:59%;
 	left:26.5%;
 	background-color: #0b9e58;
+	z-index: 2;
+}
+.lineAnimation2{
+	animation: slide2 1s;
+	animation-fill-mode: forwards;
+}
+@keyframes slide2 {
+	to {
+		left: 14.6%;
+		border-radius: 0px;
+		top: 54%;
+		width: 122px;
+		transform: rotate(270deg);
+	}
 }
 .line3{
 	transform: rotate(330deg);
-	top: 70%;
+	top: 63%;
 	left: 35%;
 	background-color: #547ebf;
+	z-index: 1;
+}
+.lineAnimation3{
+	animation: slide3 1s;
+	animation-fill-mode: forwards;
+}
+@keyframes slide3 {
+	to {
+		transform: rotate(180deg);
+		left: 25%;
+		border-radius: 0px;
+		top: 65%;
+	}
 }
 .line4{
 	transform: rotate(330deg);
-	top: 53%;
+	top: 47%;
 	right: 35%;
 	background-color: #fecd43;
 }
+.lineAnimation4{
+	animation: slide4 1s;
+	animation-fill-mode: forwards;
+}
+@keyframes slide4 {
+	to {
+		transform: rotate(180deg);
+		right: 25%;
+		border-radius: 0px;
+		top: 43.1%;
+	}
+}
 .line5{
 	transform: rotate(330deg);
-	top: 76%;
+	top: 68%;
 	right: 35%;
 	background-color: #e83a60;
 }
+.lineAnimation5{
+	animation: slide5 1s;
+	animation-fill-mode: forwards;
+}
+@keyframes slide5 {
+	to {
+		transform: rotate(180deg);
+		right: 25%;
+		border-radius: 0px;
+		top: 65%;
+		width: 150px;
+	}
+}
 .line6{
 	transform: rotate(90deg);
-	top:58%;
+	top:52%;
 	right:26.5%;
 	background-color: #e83a60;
+}
+.lineAnimation6{
+	animation: slide6 1s;
+	animation-fill-mode: forwards;
+}
+@keyframes slide6 {
+	to {
+		top: 54%;
+		right: 14.6%;
+		border-radius: 0px;
+		width: 122px;
+		transform: rotate(270deg);
+	}
+}
+.visible{
+	opacity: 1;
+	max-height: 1000px;
 }

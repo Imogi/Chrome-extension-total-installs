@@ -13,17 +13,21 @@ document.querySelector('#Total-installs-container').addEventListener('click', fu
 document.querySelector('#Total-installs-container').addEventListener('change', () => {
   const csv = document.getElementById("install-csv-upload");
   const file = csv.files[0].name;
+  const alert = document.getElementById('alert');
   if(uploadCheck(file) === -1){
     // Show alert
-    document.getElementById('alert-danger').style.display = 'flex';
-    document.getElementById('alert-danger').innerText = `${file} is not a csv file.`
-    alertTimeout('alert-danger');
+    alert.style.opacity= 1;
+    alert.innerText = `${file} is not a csv file.`
+    alert.classList.add("alert-danger")
+    alertTimeout('alert');
     return;
   }
   else{
-    document.getElementById('alert-success').style.display = 'flex';
-    document.getElementById('alert-success').innerText = `${file} uploaded!`
-    alertTimeout('alert-success');
+    // Have check if they upload the same file!
+    alert.style.opacity= 1;
+    alert.innerText = `${file} uploaded!`
+    alert.classList.add("alert-success")
+    alertTimeout('alert');
     // So parse is either successful or fails based on format of csv
     // If it passes, hide the blinking circle and do animation and present number of installs
     csvParseTotalInstalls(csv);
@@ -59,17 +63,27 @@ function csvParseTotalInstalls(csvFile) {
       */
       const total_downloads = calculateTotal(reader.result, total);
       const total_installs_container = document.getElementById("Total-installs-container");
-      total_installs_container.style.display = "none";
-      const total_div = document.createElement("div");
-      total_div.innerText = total_downloads;
-      total_div.id = "Total-installs-total-div"
-      total_div.style.fontSize = "2.5rem";
-      const home_container = document.getElementById("home-container");
-      home_container.appendChild(total_div);
+      total_installs_container.style.opacity = 0;
+      total_installs_container.classList.add("Total-installs-container-rm");
+      // Create the downloads text area div
+      // If first time uploading
+      if(document.getElementById("Total-installs-total-div") === null){
+        const total_div = document.createElement("div");
+        total_div.innerText = total_downloads + " downloads";
+        total_div.id = "Total-installs-total-div"
+        total_div.style.fontSize = "2rem";
+        const home_container = document.getElementById("home-container");
+        home_container.appendChild(total_div);
+      }
+      else{
+        document.getElementById("Total-installs-total-div").innerText = total_downloads + " downloads";
+      }
+    
       // Do animation with lines
       const lines = document.getElementsByClassName("line");
       for(var i=0; i<lines.length; i++){
-        lines[i].style.display = "flex";
+        lines[i].classList.add("visible");
+        lines[i].classList.add("lineAnimation" + String(Number(i) + 1))
       }
     }, false);
     
