@@ -13,5 +13,5 @@ export function alertTimeout(id){
   */
   setTimeout(() => {
     document.getElementById(id).style.opacity = 0;
-  }, 3000)
+  }, 6000)
 }

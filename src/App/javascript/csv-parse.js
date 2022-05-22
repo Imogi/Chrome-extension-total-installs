@@ -10,6 +10,9 @@ document.querySelector('#Total-installs-container').addEventListener('click', fu
   document.getElementById("install-csv-upload").click();
 })
 
+/*
+  Event listener for the Total installs container, i.e the big pulsing circle for uploading
+*/
 document.querySelector('#Total-installs-container').addEventListener('change', () => {
   const csv = document.getElementById("install-csv-upload");
   const file = csv.files[0].name;
@@ -23,14 +26,28 @@ document.querySelector('#Total-installs-container').addEventListener('change', (
     return;
   }
   else{
-    // Have check if they upload the same file!
-    alert.style.opacity= 1;
-    alert.innerText = `${file} uploaded!`
-    alert.classList.add("alert-success")
-    alertTimeout('alert');
-    // So parse is either successful or fails based on format of csv
-    // If it passes, hide the blinking circle and do animation and present number of installs
-    csvParseTotalInstalls(csv);
+
+    // Have check if they upload the same file! Using sessionStorage for checks
+    if(sessionStorage.getItem('current-csv-name') === file){
+      // Show alert
+      alert.style.opacity = 1;
+      alert.classList.add("alert-warning");
+      alert.innerText = `${file} was just uploaded!`
+      alertTimeout('alert');
+      document.getElementById("install-csv-upload").value = '';
+    }
+    else{
+      // Show alert
+      alert.style.opacity= 1;
+      alert.innerText = `${file} uploaded!`
+      alert.classList.add("alert-success");
+      sessionStorage.setItem('current-csv-name', file);
+      alertTimeout('alert');
+      // So parse is either successful or fails based on format of csv
+      // If it passes, hide the blinking circle and do animation and present number of installs
+      csvParseTotalInstalls(csv);
+      document.getElementById("install-csv-upload").value = '';
+    }
   }
 
 })
