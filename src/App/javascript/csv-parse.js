@@ -6,33 +6,33 @@ document.querySelector('#submit-installations').addEventListener('click', functi
     //alert("Hello! I am an alert box!!");
     //alert(csvFile.files[0].filename);
 
-    function csvToArray(str, delimiter = ",") {
+    // function csvToArray(str, delimiter = ",") {
 
-        // slice from start of text to the first \n index
-        // use split to create an array from string by delimiter
-        const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
+    //     // slice from start of text to the first \n index
+    //     // use split to create an array from string by delimiter
+    //     const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
   
-        // slice from \n index + 1 to the end of the text
-        // use split to create an array of each csv value row
-        const rows = str.slice(str.indexOf("\n") + 1).split("\n");
+    //     // slice from \n index + 1 to the end of the text
+    //     // use split to create an array of each csv value row
+    //     const rows = str.slice(str.indexOf("\n") + 1).split("\n");
 
-        // Map the rows
-        // split values from each row into an array
-        // use headers.reduce to create an object
-        // object properties derived from headers:values
-        // the object passed as an element of the array
-        const arr = rows.map(function (row) {
-          const values = row.split(delimiter);
-          const el = headers.reduce(function (object, header, index) {
-            object[header] = values[index];
-            return object;
-          }, {});
-          return el;
-        });
+    //     // Map the rows
+    //     // split values from each row into an array
+    //     // use headers.reduce to create an object
+    //     // object properties derived from headers:values
+    //     // the object passed as an element of the array
+    //     const arr = rows.map(function (row) {
+    //       const values = row.split(delimiter);
+    //       const el = headers.reduce(function (object, header, index) {
+    //         object[header] = values[index];
+    //         return object;
+    //       }, {});
+    //       return el;
+    //     });
   
-        // return the array
-        return arr;
-    }
+    //     // return the array
+    //     return arr;
+    // }
     
     const ac = (document.querySelector('#visualiser-container'));
     const file = csvFile.files[0];
@@ -41,11 +41,11 @@ document.querySelector('#submit-installations').addEventListener('click', functi
 
     reader.addEventListener("load", () => {
       // this will then display a text file
+      //
       const result = document.createTextNode(reader.result)
       ac.appendChild(result);
     }, false);
     
-
     if(file){
       reader.readAsText(file);
     }
@@ -55,49 +55,23 @@ document.querySelector('#submit-installations').addEventListener('click', functi
 
 document.querySelector('#submit-countries').addEventListener('click', function () {
     const csvFile = document.getElementById("countries-file");
-    //alert("Hello! I am an alert box!!");
-    //alert(csvFile.files[0].filename);
 
+    //selects the visualiser container page
+    const ac = (document.querySelector('#visualiser-container'));
+    const file = csvFile.files[0]
 
-    function csvToArray(str, delimiter = ",") {
-
-        // slice from start of text to the first \n index
-        // use split to create an array from string by delimiter
-        const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
-  
-        // slice from \n index + 1 to the end of the text
-        // use split to create an array of each csv value row
-        const rows = str.slice(str.indexOf("\n") + 1).split("\n");
-  
-        // Map the rows
-        // split values from each row into an array
-        // use headers.reduce to create an object
-        // object properties derived from headers:values
-        // the object passed as an element of the array
-        const arr = rows.map(function (row) {
-          const values = row.split(delimiter);
-          const el = headers.reduce(function (object, header, index) {
-            object[header] = values[index];
-            return object;
-          }, {});
-          return el;
-        });
-  
-        // return the array
-        return arr;
-    }
-
-    
-    const input = csvFile.files[0];
     const reader = new FileReader();
 
-    reader.onload = function (e) {
-    const text = e.target.result;
-    const data = csvToArray(text);
-    document.write(JSON.stringify(data));
-    };
+    reader.addEventListener("load", () => {
+      // this will then display a text file
+      const result = document.createTextNode(reader.result)
       
-    reader.readAsText(input);
+      ac.appendChild(result);
+    }, false);
+    
+    if(file){
+      reader.readAsText(file);
+    }
 
 });
 
