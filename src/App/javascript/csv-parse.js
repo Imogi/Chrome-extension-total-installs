@@ -6,7 +6,7 @@ import { uploadCheck, alertTimeout } from './helper/helper-functions.js';
 
 // document.querySelector('#submit-installations').addEventListener('click', csvParse);
 
-document.querySelector('#Total-installs-container').addEventListener('click', function(){
+document.querySelector('#Total-installs-container').addEventListener('click', () => {
   document.getElementById("install-csv-upload").click();
 })
 
@@ -14,7 +14,8 @@ document.querySelector('#Total-installs-container').addEventListener('click', fu
 /*
   Event listener for the Total installs container, i.e the big pulsing circle for uploading
 */
-document.querySelector('#Total-installs-container').addEventListener('change', () => {
+document.querySelector('#install-csv-upload').addEventListener('change', () => {
+  
   const csv = document.getElementById("install-csv-upload");
   const file = csv.files[0].name;
   const alert = document.getElementById('alert');
@@ -62,7 +63,9 @@ function csvParseTotalInstalls(csvFile) {
         the date range to isolate the number value. 
         Returns the total number of installations.
       */
+      
       var lines = str.split('\n');
+      
       for(var i=0; i<lines.length; i++){
         lines[i] = lines[i].replace(/.*,/g, '');
         if(/^\d+/.test(lines[i])){
@@ -130,51 +133,115 @@ function csvParseTotalInstalls(csvFile) {
 
 
 
-document.querySelector('#submit-countries').addEventListener('click', function () {
-    const csvFile = document.getElementById("countries-file");
-    //alert("Hello! I am an alert box!!");
-    //alert(csvFile.files[0].filename);
+// document.querySelector('#submit-countries').addEventListener('click', function () {
+//     const csvFile = document.getElementById("countries-file");
 
+//     //selects the visualiser container page
+//     const ac = (document.querySelector('#visualiser-container'));
+//     const file = csvFile.files[0]
 
-    function csvToArray(str, delimiter = ",") {
+//     const reader = new FileReader();
 
-        // slice from start of text to the first \n index
-        // use split to create an array from string by delimiter
-        const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
-  
-        // slice from \n index + 1 to the end of the text
-        // use split to create an array of each csv value row
-        const rows = str.slice(str.indexOf("\n") + 1).split("\n");
-  
-        // Map the rows
-        // split values from each row into an array
-        // use headers.reduce to create an object
-        // object properties derived from headers:values
-        // the object passed as an element of the array
-        const arr = rows.map(function (row) {
-          const values = row.split(delimiter);
-          const el = headers.reduce(function (object, header, index) {
-            object[header] = values[index];
-            return object;
-          }, {});
-          return el;
-        });
-  
-        // return the array
-        return arr;
-    }
-
-    
-    const input = csvFile.files[0];
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-    const text = e.target.result;
-    const data = csvToArray(text);
-    document.write(JSON.stringify(data));
-    };
+//     reader.addEventListener("load", () => {
+//       // this will then display a text file
+//       const result = document.createTextNode(reader.result)
       
-    reader.readAsText(input);
+//       ac.appendChild(result);
+//     }, false);
+    
+//     if(file){
+//       reader.readAsText(file);
+//     }
+
+// });
+
+document.querySelector('#submit-countries').addEventListener('click', function () {
+  const csvFile = document.getElementById("countries-file");
+  
+  function csvParseTotalInstalls(csvFile) {
+
+      function calculateTotal(str) {
+        /*finds all countries and puts them into an array*/ 
+        var countriesArray = str.split("\n")[1].split(',');
+        countriesArray.shift()
+        // console.log(countriesArray)
+        // console.log(str.split("\n")[2].split(','))
+        
+        var arr1 = []
+        /*subtract one at the end as the last line of all csv files are empty line*/ 
+        var lengthOfCsvFile = str.split('\n').length - 1;
+        var numberOfCountries = countriesArray.length;
+        for(var i=0; i<numberOfCountries; i++){
+          /*inserts each country into the array and creates a counter for the country starting at 0*/ 
+          // arr1.push([countriesArray[i]])
+          // arr1[i].push(0)
+          arr1.push({
+            country: countriesArray[i],
+            value: 0
+        });
+          /* index starts at 2 as we dont need first two rows.*/ 
+          for(var j=2; j<lengthOfCsvFile; j++){
+            arr1[i]['value'] += parseInt(str.split("\n")[j].split(',')[i+1])
+            //arr1[i].push(j)
+          }
+        }
+
+        return arr1; 
+      }
+      
+      const file = csvFile.files[0];
+      const reader = new FileReader();
+    
+      reader.addEventListener("load", () => {
+        /*
+          Once the reader loads a file successfully we then parse
+        */
+        const total_downloads = calculateTotal(reader.result, total);
+        console.log(total_downloads);
+        
+      }, false);
+      
+      if(file){
+        reader.readAsText(file);
+      }
+  };
+  csvParseTotalInstalls(csvFile);
+  // [{country: 'Canada', value: 101} ... {country: 'Malaysia', value: 21}]
+
+
+
+
+
+  //selects the visualiser container page
+  const ac = (document.querySelector('#visualiser-container'));
+  const file = csvFile.files[0]
+
+  const reader = new FileReader();
+
+  reader.addEventListener("load", () => {
+    // this will then display a text file
+    const result = document.createTextNode(reader.result)
+    console.log(typeof(result))
+    //const result = csvParseTotalInstalls(csvFile);
+    ac.appendChild(result);
+    const array = csvParseTotalInstalls(csvFile);
+    document.getElementById("div1").innerHTML = array;
+  }, false);
+  
+  if(file){
+    reader.readAsText(file);
+  }
 
 });
 
+JSC.Chart('chartDiv', {
+  type: 'horizontal column',
+  series: [
+     {
+        points: [
+           {x: 'Apples', y: 50},
+           {x: 'Oranges', y: 42}
+        ]
+     }
+  ]
+});

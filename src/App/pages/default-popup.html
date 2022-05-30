@@ -59,6 +59,8 @@
       </div>
     </nav>
   </body>
+
+  
   <!-- Home screen, i.e upload csv file for total downloads -->
   <div class="container-fluid" id="home-container">
     <div id="Total-installs-button-header">Chrome Extension total installs</div>
@@ -103,46 +105,29 @@
       </button>
 
       <div class="input-group">
-        <input
-          type="file"
-          accept=".csv"
-          class="form-control"
-          id="installations-file"
-        />
+        <input type="file" accept=".csv" class="form-control" id="installations-file" >
         <!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" -->
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          id="submit-installations"
-        >
+        <button class="btn btn-outline-secondary" type="button" id="submit-installations">
           Visualise
         </button>
       </div>
 
-      <button
-        class="btn btn-outline-primary"
-        id="csv-countries-button-click"
-        type="button"
-      >
+      <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button" >
         Upload csv All Countries
       </button>
 
+
+      
       <div class="input-group">
-        <input
-          type="file"
-          accept=".csv"
-          class="form-control"
-          id="countries-file"
-        />
-        <!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" -->
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          id="submit-countries"
-        >
+        <input type="file" accept=".csv" class="form-control" id="countries-file" >
+        <!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" --><!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" -->
+        <button class="btn btn-outline-secondary" type="button" id="submit-countries" >
           Visualise
         </button>
       </div>
+      <div id="chartDiv" style="width:50%; height:300px; margin:0 auto;"></div>
+      
+      
     </div>
   </div>
   <!-- Alerts -->
