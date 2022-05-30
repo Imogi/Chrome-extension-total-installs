@@ -34,7 +34,12 @@ body, section {
 	justify-content: center;
 	transition: all 1s ease-out;
 	cursor: pointer;
+	z-index: 10;
 }
+.total-installs-hidden{
+	opacity: 0 ;
+}
+
 
 #logo-behind{
 	position: absolute; 
@@ -96,13 +101,14 @@ body, section {
 	width: 50%;
 }
 
+
 /* Lines */
 .line{
 	position: absolute;
 	width: 120px;
 	height: 11px;
 	background-color: rgb(255, 255, 255);
-	z-index: 9;
+	z-index: 1;
 	border-radius: 15px;
 	opacity: 0;
 	max-height: 0;
