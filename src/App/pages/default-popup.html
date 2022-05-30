@@ -56,29 +56,6 @@
           </svg>
           Visualiser
         </a>
-
-        <a class="navbar-brand" id="database-nav-btn" href="#">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-clipboard2-data"
-            viewBox="0 0 16 16"
-            style="font-size: 2rem; color: cornflowerblue"
-          >
-            <path
-              d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"
-            />
-            <path
-              d="M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z"
-            />
-            <path
-              d="M10 7a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7Zm-6 4a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1Zm4-3a1 1 0 0 0-1 1v3a1 1 0 1 0 2 0V9a1 1 0 0 0-1-1Z"
-            />
-          </svg>
-          Database
-        </a>
       </div>
     </nav>
   </body>
@@ -103,15 +80,21 @@
       />
       <div id="Total-installs-button">UPLOAD CSV</div>
     </div>
-    <div class="line line1"></div>
-    <div class="line line2"></div>
-    <div class="line line3"></div>
-    <div class="line line4"></div>
-    <div class="line line5"></div>
-    <div class="line line6"></div>
+    <!-- These lines are for animating the logo -->
+    <div id="calculated-total-container">
+      <div class="line line1"></div>
+      <div class="line line2"></div>
+      <div class="line line3"></div>
+      <div class="line line4"></div>
+      <div class="line line5"></div>
+      <div class="line line6"></div>
+    </div>
   </div>
   <!-- Visualiser container -->
   <div class="container-fluid" id="visualiser-container" style="display: none">
+    <div>
+      <canvas id="myChart" width="100%" height="400px"></canvas>
+    </div>
     <div class="d-grid gap-2">
       <button
         class="btn btn-outline-primary"
@@ -147,22 +130,17 @@
       
     </div>
   </div>
-
-  <!-- Database container, i.e the leaderboard -->
-  <div class="container-fluid" id="database-container" style="display: none">
-    <div>
-      <button type="button" id="btn" class="btn btn-primary">
-        leaderboard - wow
-      </button>
-      <button type="button" id="btn" class="btn btn-primary">Yes</button>
-    </div>
-  </div>
-
   <!-- Alerts -->
   <div class="alert" id="alert" role="alert" style="opacity: 0"></div>
-  <!-- JavaScript -->
+
+  <!-- JavaScript 
+    We keep our js down here because if we put it in the header, the scripts
+    will load before the rest of the documents will and hence won't be able
+    to getElementById for example, as that element will not exist yet.
+  -->
   <script type="module" src="/App/javascript/default-popup.js"></script>
   <script type="module" src="/App/javascript/csv-parse.js"></script>
-  <script src="https://code.jscharting.com/2.9.0/jscharting.js"></script>
-  
+  <!-- Chart js -->
+  <script src="../../node_modules/chart.js/dist/chart.js"></script>
+  <script src="/App/javascript/charts/visualiser.js"></script>
 </html>

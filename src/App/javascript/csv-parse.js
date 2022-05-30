@@ -10,6 +10,7 @@ document.querySelector('#Total-installs-container').addEventListener('click', ()
   document.getElementById("install-csv-upload").click();
 })
 
+
 /*
   Event listener for the Total installs container, i.e the big pulsing circle for uploading
 */
@@ -83,21 +84,39 @@ function csvParseTotalInstalls(csvFile) {
       */
       const total_downloads = calculateTotal(reader.result, total);
       const total_installs_container = document.getElementById("Total-installs-container");
-      total_installs_container.style.opacity = 0;
-      total_installs_container.classList.add("Total-installs-container-rm");
-      // Create the downloads text area div
-      // If first time uploading
+      total_installs_container.classList.add("total-installs-hidden");
+      /*
+        Create the downloads text area div.
+        If first time uploading.
+      */
       if(document.getElementById("Total-installs-total-div") === null){
         const total_div = document.createElement("div");
         total_div.innerText = total_downloads + " downloads";
         total_div.id = "Total-installs-total-div"
         total_div.style.fontSize = "2rem";
-        const home_container = document.getElementById("home-container");
+        const home_container = document.getElementById("calculated-total-container");
         home_container.appendChild(total_div);
       }
       else{
         document.getElementById("Total-installs-total-div").innerText = total_downloads + " downloads";
       }
+
+      /*
+        I don't know why adding classes with opacity changes did not do what 
+        the code below does. Wasted so much time on this.
+      */
+      total_installs_container.addEventListener('mouseover', () => {
+        total_installs_container.style.opacity = 1;
+        document.getElementById("calculated-total-container").addEventListener('mouseover', () => {
+          document.getElementById("calculated-total-container").style.opacity = 0;
+          total_installs_container.style.opacity = 1;
+        })
+        document.getElementById("calculated-total-container").style.opacity = 0;
+      })
+      total_installs_container.addEventListener('mouseleave', () => {
+        total_installs_container.style.opacity = 0;
+        document.getElementById("calculated-total-container").style.opacity = 1;
+      })
     
       // Do animation with lines
       const lines = document.getElementsByClassName("line");
