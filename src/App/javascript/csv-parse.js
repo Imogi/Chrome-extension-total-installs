@@ -209,9 +209,6 @@ document.querySelector('#submit-countries').addEventListener('click', function (
   // [{country: 'Canada', value: 101} ... {country: 'Malaysia', value: 21}]
 
 
-
-
-
   //selects the visualiser container page
   const ac = (document.querySelector('#visualiser-container'));
   const file = csvFile.files[0]
@@ -231,5 +228,6 @@ document.querySelector('#submit-countries').addEventListener('click', function (
   if(file){
     reader.readAsText(file);
   }
+
 });
 
