@@ -33,13 +33,9 @@ body, section {
 	align-items: center;
 	justify-content: center;
 	transition: all 1s ease-out;
-	cursor: pointer;
 	z-index: 10;
+	border-radius: 100%;
 }
-.total-installs-hidden{
-	opacity: 0 ;
-}
-
 
 #logo-behind{
 	position: absolute; 
@@ -66,6 +62,7 @@ body, section {
 	justify-content: center;
 	animation: pulse 2.1s infinite;
 	font-size: 2rem;
+	cursor: pointer;
 }
 @keyframes pulse {
   0% {
