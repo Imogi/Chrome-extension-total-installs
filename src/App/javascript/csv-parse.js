@@ -93,6 +93,10 @@ function csvParseTotalInstalls(csvFile) {
       const calculated_total_container = document.getElementById(
         "calculated-total-container"
       );
+
+      // Mouse over bool, starts as true because this event listener triggers on load, i.e clicked
+      let mouseOver = true;
+
       /*
         Create the downloads text area div.
         If first time uploading.
@@ -106,9 +110,26 @@ function csvParseTotalInstalls(csvFile) {
           "calculated-total-container"
         );
         home_container.appendChild(total_div);
+        mouseOver = false;
       } else {
         document.getElementById("Total-installs-total-div").innerText =
           total_downloads + " downloads";
+        console.log("again");
+        console.log(mouseOver);
+        if (mouseOver === true) {
+          total_installs_container.style.display = "none";
+          console.log("What");
+        } else {
+          total_installs_container.style.display = "flex";
+        }
+      }
+
+      // Do animation with lines
+      // This will always run because we appended the classList.
+      const lines = document.getElementsByClassName("line");
+      for (var i = 0; i < lines.length; i++) {
+        lines[i].classList.add("visible");
+        lines[i].classList.add("lineAnimation" + String(Number(i) + 1));
       }
 
       /*
@@ -120,29 +141,18 @@ function csvParseTotalInstalls(csvFile) {
 
       // We currently have an issue where after loading another csv it will just show the total install button instead of the calculated total container.
       // I am sure it has something to do with the mouseover event listeners below.
-      calculated_total_container.addEventListener("mouseover", () => {
+      // Need to urgently refactor this file into their own components.
+      // Also would be cool when we do hover over calculated div that it morphs back into logo
+
+      // Issue is with the mouseover 100%, as we mouseover when we attempt to reupload, so after we load a new csv it still thinks we are hovering.
+      calculated_total_container.addEventListener("mouseover", (e) => {
+        calculated_total_container.style.display = "none";
         total_installs_container.style.display = "flex";
-        document
-          .getElementById("calculated-total-container")
-          .addEventListener("mouseover", () => {
-            document.getElementById(
-              "calculated-total-container"
-            ).style.display = "none";
-            total_installs_container.style.display = "flex";
-          });
       });
       total_installs_button.addEventListener("mouseleave", () => {
         total_installs_container.style.display = "none";
-        document.getElementById("calculated-total-container").style.display =
-          "flex";
+        calculated_total_container.style.display = "flex";
       });
-
-      // Do animation with lines
-      const lines = document.getElementsByClassName("line");
-      for (var i = 0; i < lines.length; i++) {
-        lines[i].classList.add("visible");
-        lines[i].classList.add("lineAnimation" + String(Number(i) + 1));
-      }
     },
     false
   );
