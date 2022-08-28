@@ -224,7 +224,7 @@ function csvParseTotalCountries(csvFile) {
     if (chartStatus != undefined) {
       chartStatus.destroy();
     }
-
+    let delayed;
     new Chart(ctx, {
       type: "doughnut",
       data: {
@@ -240,6 +240,22 @@ function csvParseTotalCountries(csvFile) {
         ],
       },
       options: {
+        animation: {
+          onComplete: () => {
+            delayed = true;
+          },
+          delay: (context) => {
+            let delay = 0;
+            if (
+              context.type === "data" &&
+              context.mode === "default" &&
+              !delayed
+            ) {
+              delay = context.dataIndex * 50 + context.datasetIndex * 100;
+            }
+            return delay;
+          },
+        },
         responsive: true,
         plugins: {
           legend: {
@@ -247,7 +263,7 @@ function csvParseTotalCountries(csvFile) {
           },
           title: {
             display: true,
-            text: "Chart.js Doughnut Chart",
+            text: "Countries by Number of Installations",
           },
         },
       },
