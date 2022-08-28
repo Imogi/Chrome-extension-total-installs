@@ -215,10 +215,17 @@ function csvParseTotalCountries(csvFile) {
     let x = calculateTotal(reader.result);
 
     myFunction1();
-    console.log(generateRandomColours());
-    const ctx1 = document.getElementById("myChartCountries").getContext("2d");
-    const randomColours = generateRandomColours(x[0].length);
-    new Chart(ctx1, {
+
+    var ctx = document.getElementById("myChartCountries").getContext("2d");
+    const randomColours = generateRandomLightColours(x[0].length);
+
+    // Canvas already in use fix
+    let chartStatus = Chart.getChart("myChartCountries");
+    if (chartStatus != undefined) {
+      chartStatus.destroy();
+    }
+
+    new Chart(ctx, {
       type: "doughnut",
       data: {
         labels: x[0],
@@ -304,10 +311,14 @@ function csvParseTotalInstallations(csvFile) {
     let x = calculateTotal(reader.result);
     myFunction();
 
-    const ctx = document
-      .getElementById("myChartInstallations")
-      .getContext("2d");
-    const randomColours = generateRandomColours(x[0].length);
+    var ctx = document.getElementById("myChartInstallations").getContext("2d");
+    const randomColours = generateRandomLightColours(x[0].length);
+
+    let chartStatus = Chart.getChart("myChartInstallations");
+    if (chartStatus != undefined) {
+      chartStatus.destroy();
+    }
+
     new Chart(ctx, {
       type: "line",
       data: {
@@ -339,7 +350,6 @@ document
     const csvFile = document.getElementById("installations-file");
 
     csvParseTotalInstallations(csvFile);
-    // [{country: 'Canada', value: 101} ... {country: 'Malaysia', value: 21}]
   });
 
 function myFunction() {
@@ -360,7 +370,7 @@ function myFunction1() {
   }
 }
 
-function generateRandomColours(numberOfColours) {
+function generateRandomLightColours(numberOfColours) {
   function getRandomColor() {
     var letters = "BCDEF".split("");
     var color = "#";
