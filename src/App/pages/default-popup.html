@@ -93,41 +93,53 @@
   <!-- Visualiser container -->
   <div class="container-fluid" id="visualiser-container" style="display: none">
 
-    <canvas id="myChart" width="100%" height="400px"></canvas>
+    
 
+    
+
+    
     <div class="d-grid gap-2">
+      
+
+      <!--
+      <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button" >
+        Upload csv All Countries
+      </button>-->
+
+
+      
+      <div class="input-group">
+        <input type="file" accept=".csv" class="form-control" id="countries-file" >
+        <button class="btn btn-outline-secondary" type="button" id="submit-countries" >
+          Visualise
+        </button>
+      </div>
+
+      <!--
       <button
         class="btn btn-outline-primary"
         id="csv-installs-button-click"
         type="button"
       >
         Upload csv no. Installs
-      </button>
+      </button>-->
 
       <div class="input-group">
         <input type="file" accept=".csv" class="form-control" id="installations-file" >
-        <!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" -->
         <button class="btn btn-outline-secondary" type="button" id="submit-installations">
           Visualise
         </button>
       </div>
 
-      <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button" >
-        Upload csv All Countries
-      </button>
-
-
       
-      <div class="input-group">
-        <input type="file" accept=".csv" class="form-control" id="countries-file" >
-        <!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" --><!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" -->
-        <button class="btn btn-outline-secondary" type="button" id="submit-countries" >
-          Visualise
-        </button>
+      <div id="chartDiv" style="width:100%; height:200px; margin:0 auto; display: none;">
+      
+        <canvas id="myChart" width="100%" height="100px"></canvas>
       </div>
-      <div id="chartDiv" style="width:50%; height:300px; margin:0 auto;"></div>
       
+
       
+      <div id="chartDiv" style="width:50%; height:50px; margin:0 auto;"></div>
     </div>
   </div>
   <!-- Alerts -->
@@ -140,7 +152,8 @@
   -->
   <script type="module" src="/App/javascript/default-popup.js"></script>
   <script type="module" src="/App/javascript/csv-parse.js"></script>
+  <script type="module" src="/App/javascript/charts/visualiser.js"></script>
   <!-- Chart js -->
   <script src="../../node_modules/chart.js/dist/chart.js"></script>
-  <script src="/App/javascript/charts/visualiser.js"></script>
+  
 </html>
