@@ -60,7 +60,6 @@
     </nav>
   </body>
 
-  
   <!-- Home screen, i.e upload csv file for total downloads -->
   <div class="container-fluid" id="home-container">
     <div id="Total-installs-button-header">Chrome Extension total installs</div>
@@ -92,25 +91,24 @@
   </div>
   <!-- Visualiser container -->
   <div class="container-fluid" id="visualiser-container" style="display: none">
-
-    
-
-    
-
-    
     <div class="d-grid gap-2">
-      
-
       <!--
       <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button" >
         Upload csv All Countries
       </button>-->
 
-
-      
       <div class="input-group">
-        <input type="file" accept=".csv" class="form-control" id="countries-file" >
-        <button class="btn btn-outline-secondary" type="button" id="submit-countries" >
+        <input
+          type="file"
+          accept=".csv"
+          class="form-control"
+          id="countries-file"
+        />
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          id="submit-countries"
+        >
           Visualise
         </button>
       </div>
@@ -125,21 +123,29 @@
       </button>-->
 
       <div class="input-group">
-        <input type="file" accept=".csv" class="form-control" id="installations-file" >
-        <button class="btn btn-outline-secondary" type="button" id="submit-installations">
+        <input
+          type="file"
+          accept=".csv"
+          class="form-control"
+          id="installations-file"
+        />
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          id="submit-installations"
+        >
           Visualise
         </button>
       </div>
 
-      
-      <div id="chartDiv" style="width:100%; height:200px; margin:0 auto; display: none;">
-      
-        <canvas id="myChart" width="100%" height="100px"></canvas>
+      <div
+        id="chartDiv"
+        style="width: 100%; height: 200px; margin: 0 auto; display: none"
+      >
+        <canvas id="myChart" width="100%" height="50px"></canvas>
       </div>
-      
 
-      
-      <div id="chartDiv" style="width:50%; height:50px; margin:0 auto;"></div>
+      <div id="chartDiv" style="width: 50%; height: 50px; margin: 0 auto"></div>
     </div>
   </div>
   <!-- Alerts -->
@@ -155,5 +161,4 @@
   <script type="module" src="/App/javascript/charts/visualiser.js"></script>
   <!-- Chart js -->
   <script src="../../node_modules/chart.js/dist/chart.js"></script>
-  
 </html>

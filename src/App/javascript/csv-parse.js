@@ -211,11 +211,9 @@ function csvParseTotalInstallations(csvFile) {
     /* index starts at 2 as we dont need first two rows.*/
     for (var j = 2; j < lengthOfCsvFile; j++) {
       //arrayOfDates[i]['value'] += parseInt(string.split("\n")[j].split(',')[i+1])
-      arrayOfDates += string.split("\n")[j].split(",")[0];
-      arrayOfDates += ", ";
+      arrayOfDates.push(String(string.split("\n")[j].split(",")[0]));
 
-      arrayOfInstalls += string.split("\n")[j].split(",")[1];
-      arrayOfInstalls += ", ";
+      arrayOfInstalls.push(parseInt(string.split("\n")[j].split(",")[1]));
     }
     //console.log(arrayOfDates)
     //console.log(arrayOfInstalls)
@@ -240,6 +238,9 @@ function csvParseTotalInstallations(csvFile) {
 
     let x = calculateTotal(reader.result);
     myFunction();
+
+    console.log(x[0]);
+    console.log(x[1]);
 
     const ctx = document.getElementById("myChart").getContext("2d");
     new Chart(ctx, {
