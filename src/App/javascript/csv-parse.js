@@ -139,57 +139,122 @@ function csvParseTotalInstalls(csvFile) {
   }
 }
 
-// document.querySelector('#submit-countries').addEventListener('click', function () {
+// document
+//   .querySelector("#submit-countries")
+//   .addEventListener("click", function () {
 //     const csvFile = document.getElementById("countries-file");
 
 //     //selects the visualiser container page
-//     const ac = (document.querySelector('#visualiser-container'));
-//     const file = csvFile.files[0]
+//     const ac = document.querySelector("#visualiser-container");
+//     const file = csvFile.files[0];
 
 //     const reader = new FileReader();
 
-//     reader.addEventListener("load", () => {
-//       // this will then display a text file
-//       const result = document.createTextNode(reader.result)
+//     reader.addEventListener(
+//       "load",
+//       () => {
+//         // this will then display a text file
+//         const result = document.createTextNode(reader.result);
 
-//       ac.appendChild(result);
-//     }, false);
+//         ac.appendChild(result);
+//       },
+//       false
+//     );
 
-//     if(file){
+//     if (file) {
 //       reader.readAsText(file);
 //     }
+//   });
 
-// });
+function csvParseTotalCountries(csvFile) {
+  function calculateTotal(string) {
+    /*finds all countries and puts them into an array*/
+    // console.log(string);
+    var countriesArray = string.split("\n")[1].split(",");
+    // Removes first element from array
+    countriesArray.shift();
+    //console.log(countriesArray);
+
+    // console.log(countriesArray);
+    // console.log(string.split("\n")[3].split(","));
+
+    var installationsPerCountry = [];
+    /*subtract one at the end as the last line of all csv files are empty line*/
+    var lengthOfCsvFile = string.split("\n").length - 1;
+
+    var numberOfCountries = countriesArray.length;
+    for (var i = 0; i < numberOfCountries; i++) {
+      /*inserts each country into the array and creates a counter for the country starting at 0*/
+      // arr1.push({
+      //   country: countriesArray[i],
+      //   value: 0,
+      // });
+      // countriesArray.push(String(countriesArray[i]));
+
+      let n = 0;
+      /* index starts at 2 as we dont need first two rows.*/
+      for (var j = 2; j < lengthOfCsvFile; j++) {
+        n += parseInt(string.split("\n")[j].split(",")[i + 1]);
+        //arr1[i].push(j)
+      }
+      installationsPerCountry.push(n);
+    }
+
+    return [countriesArray, installationsPerCountry];
+  }
+  const file = csvFile.files[0];
+  const reader = new FileReader();
+  if (file) {
+    reader.readAsText(file);
+  }
+  // This load occurs asynchrounously
+  reader.addEventListener("load", () => {
+    /*
+      Once the reader loads a file successfully we then parse
+    */
+    let x = calculateTotal(reader.result);
+
+    myFunction1();
+    console.log(generateRandomColours());
+    const ctx1 = document.getElementById("myChartCountries").getContext("2d");
+    const randomColours = generateRandomColours(x[0].length);
+    new Chart(ctx1, {
+      type: "doughnut",
+      data: {
+        labels: x[0],
+        datasets: [
+          {
+            label: "Dataset 1",
+            data: x[1],
+            backgroundColor: randomColours,
+            borderColor: randomColours,
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+          },
+          title: {
+            display: true,
+            text: "Chart.js Doughnut Chart",
+          },
+        },
+      },
+    });
+  });
+}
 
 document
   .querySelector("#submit-countries")
   .addEventListener("click", function () {
     const csvFile = document.getElementById("countries-file");
 
-    //csvParseTotalInstallations(csvFile);
+    csvParseTotalCountries(csvFile);
     // [{country: 'Canada', value: 101} ... {country: 'Malaysia', value: 21}]
-
-    //selects the visualiser container page
-    const ac = document.querySelector("#visualiser-container");
-    const file = csvFile.files[0];
-
-    const reader = new FileReader();
-
-    reader.addEventListener(
-      "load",
-      () => {
-        // this will then display a text file
-        const result = document.createTextNode(reader.result);
-        //console.log(typeof(result))
-        //const result = csvParseTotalInstalls(csvFile);
-        ac.appendChild(result);
-      },
-      false
-    );
-
-    if (file) {
-      reader.readAsText(file);
-    }
   });
 
 function csvParseTotalInstallations(csvFile) {
@@ -239,10 +304,10 @@ function csvParseTotalInstallations(csvFile) {
     let x = calculateTotal(reader.result);
     myFunction();
 
-    console.log(x[0]);
-    console.log(x[1]);
-
-    const ctx = document.getElementById("myChart").getContext("2d");
+    const ctx = document
+      .getElementById("myChartInstallations")
+      .getContext("2d");
+    const randomColours = generateRandomColours(x[0].length);
     new Chart(ctx, {
       type: "line",
       data: {
@@ -251,22 +316,8 @@ function csvParseTotalInstallations(csvFile) {
           {
             label: "Number Of Installs",
             data: x[1],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-            ],
+            backgroundColor: randomColours,
+            borderColor: randomColours,
             borderWidth: 1,
           },
         ],
@@ -292,10 +343,37 @@ document
   });
 
 function myFunction() {
-  var x = document.getElementById("chartDiv");
+  var x = document.getElementById("chartDivInstallations");
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
     x.style.display = "none";
   }
+}
+
+function myFunction1() {
+  var x = document.getElementById("chartDivCountries");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function generateRandomColours(numberOfColours) {
+  function getRandomColor() {
+    var letters = "BCDEF".split("");
+    var color = "#";
+    for (var i = 1; i <= 6; i++) {
+      color += letters[Math.floor(Math.random() * letters.length)];
+    }
+    return color;
+  }
+
+  var x = [];
+  for (var j = 0; j < numberOfColours; j++) {
+    x.push(getRandomColor());
+  }
+
+  return x;
 }
