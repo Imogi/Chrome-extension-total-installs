@@ -227,6 +227,10 @@ section {
   max-height: 1000px;
 }
 
-/* .container-fluid a {
-  background-color: #fbfbfb !important;
+nav-link {
+  color: var(--bs-yellow);
+}
+
+/* .nav-tabs-border-width {
+  width: 50px;
 } */
