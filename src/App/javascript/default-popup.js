@@ -11,7 +11,13 @@ document
   .addEventListener("click", function () {
     document.getElementById("home-container").style.display = "none";
     document.getElementById("visualiser-container").style.display = "block";
-    document.getElementById("countries-container").style.display = "block";
+    if (
+      document.getElementById("countries-nav-btn").classList.contains("active")
+    ) {
+      document.getElementById("countries-container").style.display = "block";
+    } else {
+      document.getElementById("installation-container").style.display = "block";
+    }
   });
 
 document
