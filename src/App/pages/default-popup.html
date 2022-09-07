@@ -15,10 +15,10 @@
 
   <!-- Navigation bar -->
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light border lead" id="main-navbar">
       <div class="container-fluid">
         <a class="navbar-brand" id="home-nav-btn" href="#">
-          <!-- <svg
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
@@ -35,12 +35,12 @@
               fill-rule="evenodd"
               d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
             />
-          </svg> -->
+          </svg>
           Home
         </a>
 
         <a class="navbar-brand" id="visualiser-nav-btn" href="#">
-          <!-- <svg
+          <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
@@ -53,7 +53,7 @@
             <path
               d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"
             />
-          </svg> -->
+          </svg>
           Visualiser
         </a>
       </div>
@@ -61,7 +61,7 @@
   </body>
 
   <!-- Home screen, i.e upload csv file for total downloads -->
-  <div class="container-fluid" id="home-container" style="display: block">
+  <div class="container-fluid lead" id="home-container" style="display: block">
     <div id="Total-installs-button-header">Chrome Extension total installs</div>
     <div id="Total-installs-container">
       <img
@@ -91,22 +91,24 @@
   </div>
   <!-- Visualiser container -->
   <div class="container-fluid" id="visualiser-container" style="display: none">
-    <nav class="nav nav-tabs sticky-top nav-pills nav-fill" id="sub-navbar">
+    <div id="chartDiv" style="width: 50%; height: 10px; margin: 0 auto"></div>
+    <!-- Sub navbar-->
+    <nav class="nav nav-tabs sticky-top nav-fill bg-light">
       <a
         class="nav-link active"
         id="countries-nav-btn"
         aria-current="page"
-        href="#"
         aria-selected="true"
+        href="#"
         >Countries</a
       >
-      <a class="nav-link" id="installs-nav-btn" href="#" aria-selected="false"
+      <a class="nav-link" id="installs-nav-btn" aria-selected="false" href="#"
         >Installations</a
       >
     </nav>
-    <!-- Visualiser container subtab Countries-->
+    <!-- Visualiser sub navbar Countries-->
     <div class="container-fluid" id="countries-container" style="display: none">
-      <div id="chartDiv" style="width: 50%; height: 10px; margin: 0 auto"></div>
+      <div style="width: 50%; height: 10px; margin: 0 auto"></div>
       <div class="d-grid gap-2">
         <!--
         <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button" >
@@ -128,24 +130,23 @@
             Visualise
           </button>
         </div>
-
         <div
+          class="bg-light"
           id="chartDivCountries"
-          style="width: 100%; height: 550px; margin: 0 auto; display: none"
+          style="width: 100%; height: 530px; margin: 0 auto; display: none"
         >
           <canvas id="myChartCountries" width="100%" height="500px"></canvas>
         </div>
-
-        <!--Gap at the end of the installations chart -->
+        <div style="width: 50%; height: 20px; margin: 0 auto"></div>
       </div>
     </div>
-    <!-- Visualiser container subtabs Installations-->
+    <!-- Visualiser sub navbar Installations-->
     <div
       class="container-fluid"
       id="installation-container"
       style="display: none"
     >
-      <div id="chartDiv" style="width: 50%; height: 10px; margin: 0 auto"></div>
+      <div style="width: 50%; height: 10px; margin: 0 auto"></div>
       <div class="d-grid gap-2">
         <!--
       <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button" >
@@ -169,6 +170,7 @@
         </div>
 
         <div
+          class="bg-light"
           id="chartDivInstallations"
           style="width: 100%; height: 500px; margin: 0 auto; display: none"
         >
@@ -179,6 +181,7 @@
           ></canvas>
         </div>
       </div>
+      <div style="width: 50%; height: 20px; margin: 0 auto"></div>
     </div>
   </div>
 

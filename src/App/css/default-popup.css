@@ -16,9 +16,9 @@ section {
   background-color: beige !important;
 }
 
-.navbar-brand {
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* .navbar-brand {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+} */
 
 /*
 	CSS for total install upload page
@@ -227,10 +227,7 @@ section {
   max-height: 1000px;
 }
 
-nav-link {
-  color: var(--bs-yellow);
+.navbar .navbar-brand {
+  margin-right: 85px;
+  margin-left: 85px;
 }
-
-/* .nav-tabs-border-width {
-  width: 50px;
-} */

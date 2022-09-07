@@ -214,7 +214,7 @@ function csvParseTotalCountries(csvFile) {
     */
     let x = calculateTotal(reader.result);
 
-    myFunction1();
+    displayGraphCountries();
 
     var ctx = document.getElementById("myChartCountries").getContext("2d");
     const randomColours = generateRandomLightColours(x[0].length);
@@ -325,7 +325,7 @@ function csvParseTotalInstallations(csvFile) {
     */
 
     let x = calculateTotal(reader.result);
-    myFunction();
+    displayGraphInstallations();
 
     var ctx = document.getElementById("myChartInstallations").getContext("2d");
     const randomColours = generateRandomLightColours(x[0].length);
@@ -344,8 +344,6 @@ function csvParseTotalInstallations(csvFile) {
             label: "Number Of Installs",
             data: x[1],
             backgroundColor: randomColours,
-            borderColor: randomColours,
-            borderWidth: 1,
           },
         ],
       },
@@ -353,6 +351,12 @@ function csvParseTotalInstallations(csvFile) {
         scales: {
           y: {
             beginAtZero: true,
+          },
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: "Number of Installations of Chrome Extension",
           },
         },
       },
@@ -368,21 +372,17 @@ document
     csvParseTotalInstallations(csvFile);
   });
 
-function myFunction() {
-  var x = document.getElementById("chartDivInstallations");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
-function myFunction1() {
+function displayGraphCountries() {
   var x = document.getElementById("chartDivCountries");
   if (x.style.display === "none") {
     x.style.display = "block";
-  } else {
-    x.style.display = "none";
+  }
+}
+
+function displayGraphInstallations() {
+  var x = document.getElementById("chartDivInstallations");
+  if (x.style.display === "none") {
+    x.style.display = "block";
   }
 }
 
