@@ -15,7 +15,7 @@
 
   <!-- Navigation bar -->
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light border lead" id="main-navbar">
       <div class="container-fluid">
         <a class="navbar-brand" id="home-nav-btn" href="#">
           <svg
@@ -61,7 +61,7 @@
   </body>
 
   <!-- Home screen, i.e upload csv file for total downloads -->
-  <div class="container-fluid" id="home-container">
+  <div class="container-fluid lead" id="home-container" style="display: block">
     <div id="Total-installs-button-header">Chrome Extension total installs</div>
     <div id="Total-installs-container">
       <img
@@ -88,68 +88,104 @@
       <div class="line line5"></div>
       <div class="line line6"></div>
     </div>
+    <div style="width: 50%; height: 64px; margin: 0 auto"></div>
   </div>
   <!-- Visualiser container -->
   <div class="container-fluid" id="visualiser-container" style="display: none">
-    <div>
-      <canvas id="myChart" width="100%" height="400px"></canvas>
+    <div id="chartDiv" style="width: 50%; height: 10px; margin: 0 auto"></div>
+    <!-- Sub navbar-->
+    <nav class="nav nav-tabs sticky-top nav-fill bg-light">
+      <a
+        class="nav-link active"
+        id="countries-nav-btn"
+        aria-current="page"
+        aria-selected="true"
+        href="#"
+        >Countries</a
+      >
+      <a class="nav-link" id="installs-nav-btn" aria-selected="false" href="#"
+        >Installations</a
+      >
+    </nav>
+    <!-- Visualiser sub navbar Countries-->
+    <div class="container-fluid" id="countries-container" style="display: none">
+      <div style="width: 50%; height: 10px; margin: 0 auto"></div>
+      <div class="d-grid gap-2">
+        <!--
+        <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button" >
+          Upload csv All Countries
+        </button>-->
+
+        <div class="input-group">
+          <input
+            type="file"
+            accept=".csv"
+            class="form-control"
+            id="countries-file"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            id="submit-countries"
+          >
+            Visualise
+          </button>
+        </div>
+        <div
+          class="bg-light border"
+          id="chartDivCountries"
+          style="width: 100%; height: 530px; margin: 0 auto; display: none"
+        >
+          <canvas id="myChartCountries" width="100%" height="500px"></canvas>
+        </div>
+        <div style="width: 50%; height: 20px; margin: 0 auto"></div>
+      </div>
     </div>
-    <div class="d-grid gap-2">
-      <button
-        class="btn btn-outline-primary"
-        id="csv-installs-button-click"
-        type="button"
-      >
-        Upload csv no. Installs
-      </button>
-
-      <div class="input-group">
-        <input
-          type="file"
-          accept=".csv"
-          class="form-control"
-          id="installations-file"
-        />
-        <!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" -->
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          id="submit-installations"
-        >
-          Visualise
-        </button>
-      </div>
-
-      <button
-        class="btn btn-outline-primary"
-        id="csv-countries-button-click"
-        type="button"
-      >
+    <!-- Visualiser sub navbar Installations-->
+    <div
+      class="container-fluid"
+      id="installation-container"
+      style="display: none"
+    >
+      <div style="width: 50%; height: 10px; margin: 0 auto"></div>
+      <div class="d-grid gap-2">
+        <!--
+      <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button" >
         Upload csv All Countries
-      </button>
+      </button>-->
 
-      <div class="input-group">
-        <input
-          type="file"
-          accept=".csv"
-          class="form-control"
-          id="countries-file"
-        />
-        <!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" --><!-- aria-describedby="inputGroupFileAddon04" aria-label="Upload" -->
-        <button
-          class="btn btn-outline-secondary"
-          type="button"
-          id="submit-countries"
+        <div class="input-group">
+          <input
+            type="file"
+            accept=".csv"
+            class="form-control"
+            id="installations-file"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            id="submit-installations"
+          >
+            Visualise
+          </button>
+        </div>
+
+        <div
+          class="bg-light border"
+          id="chartDivInstallations"
+          style="width: 100%; height: 500px; margin: 0 auto; display: none"
         >
-          Visualise
-        </button>
+          <canvas
+            id="myChartInstallations"
+            width="100%"
+            height="100px"
+          ></canvas>
+        </div>
       </div>
-      <div
-        id="chartDiv"
-        style="width: 50%; height: 300px; margin: 0 auto"
-      ></div>
+      <div style="width: 50%; height: 20px; margin: 0 auto"></div>
     </div>
   </div>
+
   <!-- Alerts -->
   <div class="alert" id="alert" role="alert" style="opacity: 0"></div>
 
@@ -160,7 +196,7 @@
   -->
   <script type="module" src="/App/javascript/default-popup.js"></script>
   <script type="module" src="/App/javascript/csv-parse.js"></script>
+  <script type="module" src="/App/javascript/charts/visualiser.js"></script>
   <!-- Chart js -->
   <script src="../../node_modules/chart.js/dist/chart.js"></script>
-  <script src="/App/javascript/charts/visualiser.js"></script>
 </html>

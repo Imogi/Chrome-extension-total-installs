@@ -81,18 +81,10 @@ function csvParseTotalInstalls(csvFile) {
         Once the reader loads a file successfully we then parse
       */
       const total_downloads = calculateTotal(reader.result, total);
-
       const total_installs_container = document.getElementById(
         "Total-installs-container"
       );
-      total_installs_container.style.display = "none";
-
-      const total_installs_button = document.getElementById(
-        "Total-installs-button"
-      );
-      const calculated_total_container = document.getElementById(
-        "calculated-total-container"
-      );
+      total_installs_container.classList.add("total-installs-hidden");
       /*
         Create the downloads text area div.
         If first time uploading.
@@ -114,27 +106,22 @@ function csvParseTotalInstalls(csvFile) {
       /*
         I don't know why adding classes with opacity changes did not do what 
         the code below does. Wasted so much time on this.
-        visibility:hidden or opacity : 0 hides the element, but it still takes up space in the layout.
-        solution was -> display:none removes the element from the document. It does not take up any space.
       */
-
-      // We currently have an issue where after loading another csv it will just show the total install button instead of the calculated total container.
-      // I am sure it has something to do with the mouseover event listeners below.
-      calculated_total_container.addEventListener("mouseover", () => {
-        total_installs_container.style.display = "flex";
+      total_installs_container.addEventListener("mouseover", () => {
+        total_installs_container.style.opacity = 1;
         document
           .getElementById("calculated-total-container")
           .addEventListener("mouseover", () => {
             document.getElementById(
               "calculated-total-container"
-            ).style.display = "none";
-            total_installs_container.style.display = "flex";
+            ).style.opacity = 0;
+            total_installs_container.style.opacity = 1;
           });
+        document.getElementById("calculated-total-container").style.opacity = 0;
       });
-      total_installs_button.addEventListener("mouseleave", () => {
-        total_installs_container.style.display = "none";
-        document.getElementById("calculated-total-container").style.display =
-          "flex";
+      total_installs_container.addEventListener("mouseleave", () => {
+        total_installs_container.style.opacity = 0;
+        document.getElementById("calculated-total-container").style.opacity = 1;
       });
 
       // Do animation with lines
@@ -152,106 +139,267 @@ function csvParseTotalInstalls(csvFile) {
   }
 }
 
-// document.querySelector('#submit-countries').addEventListener('click', function () {
+// document
+//   .querySelector("#submit-countries")
+//   .addEventListener("click", function () {
 //     const csvFile = document.getElementById("countries-file");
 
 //     //selects the visualiser container page
-//     const ac = (document.querySelector('#visualiser-container'));
-//     const file = csvFile.files[0]
+//     const ac = document.querySelector("#visualiser-container");
+//     const file = csvFile.files[0];
 
 //     const reader = new FileReader();
 
-//     reader.addEventListener("load", () => {
-//       // this will then display a text file
-//       const result = document.createTextNode(reader.result)
+//     reader.addEventListener(
+//       "load",
+//       () => {
+//         // this will then display a text file
+//         const result = document.createTextNode(reader.result);
 
-//       ac.appendChild(result);
-//     }, false);
+//         ac.appendChild(result);
+//       },
+//       false
+//     );
 
-//     if(file){
+//     if (file) {
 //       reader.readAsText(file);
 //     }
+//   });
 
-// });
+function csvParseTotalCountries(csvFile) {
+  function calculateTotal(string) {
+    /*finds all countries and puts them into an array*/
+    // console.log(string);
+    var countriesArray = string.split("\n")[1].split(",");
+    // Removes first element from array
+    countriesArray.shift();
+    //console.log(countriesArray);
+
+    // console.log(countriesArray);
+    // console.log(string.split("\n")[3].split(","));
+
+    var installationsPerCountry = [];
+    /*subtract one at the end as the last line of all csv files are empty line*/
+    var lengthOfCsvFile = string.split("\n").length - 1;
+
+    var numberOfCountries = countriesArray.length;
+    for (var i = 0; i < numberOfCountries; i++) {
+      /*inserts each country into the array and creates a counter for the country starting at 0*/
+      // arr1.push({
+      //   country: countriesArray[i],
+      //   value: 0,
+      // });
+      // countriesArray.push(String(countriesArray[i]));
+
+      let n = 0;
+      /* index starts at 2 as we dont need first two rows.*/
+      for (var j = 2; j < lengthOfCsvFile; j++) {
+        n += parseInt(string.split("\n")[j].split(",")[i + 1]);
+        //arr1[i].push(j)
+      }
+      installationsPerCountry.push(n);
+    }
+
+    return [countriesArray, installationsPerCountry];
+  }
+  const file = csvFile.files[0];
+  const reader = new FileReader();
+  if (file) {
+    reader.readAsText(file);
+  }
+  // This load occurs asynchrounously
+  reader.addEventListener("load", () => {
+    /*
+      Once the reader loads a file successfully we then parse
+    */
+    let x = calculateTotal(reader.result);
+
+    displayGraphCountries();
+
+    var ctx = document.getElementById("myChartCountries").getContext("2d");
+    const randomColours = generateRandomLightColours(x[0].length);
+
+    // Canvas already in use fix
+    let chartStatus = Chart.getChart("myChartCountries");
+    if (chartStatus != undefined) {
+      chartStatus.destroy();
+    }
+    let delayed;
+    new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: x[0],
+        datasets: [
+          {
+            label: "Dataset 1",
+            data: x[1],
+            backgroundColor: randomColours,
+            borderColor: ["white"],
+            borderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        animation: {
+          onComplete: () => {
+            delayed = true;
+          },
+          delay: (context) => {
+            let delay = 0;
+            if (
+              context.type === "data" &&
+              context.mode === "default" &&
+              !delayed
+            ) {
+              delay = context.dataIndex * 50 + context.datasetIndex * 100;
+            }
+            return delay;
+          },
+        },
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+          },
+          title: {
+            display: true,
+            text: "Countries by Number of Installations",
+          },
+        },
+      },
+    });
+  });
+}
 
 document
   .querySelector("#submit-countries")
   .addEventListener("click", function () {
     const csvFile = document.getElementById("countries-file");
 
-    function csvParseTotalInstalls(csvFile) {
-      function calculateTotal(str) {
-        /*finds all countries and puts them into an array*/
-        var countriesArray = str.split("\n")[1].split(",");
-        countriesArray.shift();
-        // console.log(countriesArray)
-        // console.log(str.split("\n")[2].split(','))
-
-        var arr1 = [];
-        /*subtract one at the end as the last line of all csv files are empty line*/
-        var lengthOfCsvFile = str.split("\n").length - 1;
-        var numberOfCountries = countriesArray.length;
-        for (var i = 0; i < numberOfCountries; i++) {
-          /*inserts each country into the array and creates a counter for the country starting at 0*/
-          // arr1.push([countriesArray[i]])
-          // arr1[i].push(0)
-          arr1.push({
-            country: countriesArray[i],
-            value: 0,
-          });
-          /* index starts at 2 as we dont need first two rows.*/
-          for (var j = 2; j < lengthOfCsvFile; j++) {
-            arr1[i]["value"] += parseInt(str.split("\n")[j].split(",")[i + 1]);
-            //arr1[i].push(j)
-          }
-        }
-
-        return arr1;
-      }
-
-      const file = csvFile.files[0];
-      const reader = new FileReader();
-
-      reader.addEventListener(
-        "load",
-        () => {
-          /*
-          Once the reader loads a file successfully we then parse
-        */
-          const total_downloads = calculateTotal(reader.result, total);
-          console.log(total_downloads);
-        },
-        false
-      );
-
-      if (file) {
-        reader.readAsText(file);
-      }
-    }
-    csvParseTotalInstalls(csvFile);
+    csvParseTotalCountries(csvFile);
     // [{country: 'Canada', value: 101} ... {country: 'Malaysia', value: 21}]
-
-    //selects the visualiser container page
-    const ac = document.querySelector("#visualiser-container");
-    const file = csvFile.files[0];
-
-    const reader = new FileReader();
-
-    reader.addEventListener(
-      "load",
-      () => {
-        // this will then display a text file
-        const result = document.createTextNode(reader.result);
-        console.log(typeof result);
-        //const result = csvParseTotalInstalls(csvFile);
-        ac.appendChild(result);
-        const array = csvParseTotalInstalls(csvFile);
-        document.getElementById("div1").innerHTML = array;
-      },
-      false
-    );
-
-    if (file) {
-      reader.readAsText(file);
-    }
   });
+
+function csvParseTotalInstallations(csvFile) {
+  function calculateTotal(string) {
+    /*finds all countries and puts them into an array*/
+    //console.log(string)
+    //var countriesArray = string.split("\n")[0].split(',');
+    //console.log(countriesArray)
+    //countriesArray.shift()
+    //console.log(countriesArray)
+    //console.log(string.split("\n")[2].split(',')[0])
+
+    var arrayOfDates = [];
+    var arrayOfInstalls = [];
+
+    /*subtract one at the end as the last line of all csv files are empty line*/
+    var lengthOfCsvFile = string.split("\n").length - 1;
+
+    /* index starts at 2 as we dont need first two rows.*/
+    for (var j = 2; j < lengthOfCsvFile; j++) {
+      //arrayOfDates[i]['value'] += parseInt(string.split("\n")[j].split(',')[i+1])
+      arrayOfDates.push(String(string.split("\n")[j].split(",")[0]));
+
+      arrayOfInstalls.push(parseInt(string.split("\n")[j].split(",")[1]));
+    }
+    //console.log(arrayOfDates)
+    //console.log(arrayOfInstalls)
+
+    //console.log([arrayOfDates, arrayOfInstalls]);
+
+    return [arrayOfDates, arrayOfInstalls];
+  }
+
+  const file = csvFile.files[0];
+  const reader = new FileReader();
+
+  if (file) {
+    reader.readAsText(file);
+  }
+
+  // This load occurs asynchrounously
+  reader.addEventListener("load", () => {
+    /*
+      Once the reader loads a file successfully we then parse
+    */
+
+    let x = calculateTotal(reader.result);
+    displayGraphInstallations();
+
+    var ctx = document.getElementById("myChartInstallations").getContext("2d");
+    const randomColours = generateRandomLightColours(x[0].length);
+
+    let chartStatus = Chart.getChart("myChartInstallations");
+    if (chartStatus != undefined) {
+      chartStatus.destroy();
+    }
+
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: x[0],
+        datasets: [
+          {
+            label: "Number Of Installs",
+            data: x[1],
+            backgroundColor: randomColours,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: "Number of Installations of Chrome Extension",
+          },
+        },
+      },
+    });
+  });
+}
+
+document
+  .querySelector("#submit-installations")
+  .addEventListener("click", function () {
+    const csvFile = document.getElementById("installations-file");
+
+    csvParseTotalInstallations(csvFile);
+  });
+
+function displayGraphCountries() {
+  var x = document.getElementById("chartDivCountries");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  }
+}
+
+function displayGraphInstallations() {
+  var x = document.getElementById("chartDivInstallations");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  }
+}
+
+function generateRandomLightColours(numberOfColours) {
+  function getRandomColor() {
+    var letters = "BCDEF".split("");
+    var color = "#";
+    for (var i = 1; i <= 6; i++) {
+      color += letters[Math.floor(Math.random() * letters.length)];
+    }
+    return color;
+  }
+
+  var x = [];
+  for (var j = 0; j < numberOfColours; j++) {
+    x.push(getRandomColor());
+  }
+
+  return x;
+}
