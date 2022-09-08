@@ -330,6 +330,7 @@ function csvParseTotalInstallations(csvFile) {
     var ctx = document.getElementById("myChartInstallations").getContext("2d");
     const randomColours = generateRandomLightColours(x[0].length);
 
+    // Canvas already in use fix
     let chartStatus = Chart.getChart("myChartInstallations");
     if (chartStatus != undefined) {
       chartStatus.destroy();
@@ -372,6 +373,7 @@ document
     csvParseTotalInstallations(csvFile);
   });
 
+// Helper functions
 function displayGraphCountries() {
   var x = document.getElementById("chartDivCountries");
   if (x.style.display === "none") {
@@ -403,3 +405,36 @@ function generateRandomLightColours(numberOfColours) {
 
   return x;
 }
+
+addEventListener("DOMContentLoaded", (event) => {
+  const ctx = document
+    .getElementById("placeholder-countries-image")
+    .getContext("2d");
+  const data = {
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: [1, 2.5, 5],
+        borderColor: ["white"],
+        borderWidth: 2,
+        backgroundColor: ["rgb(220,220,220)"],
+      },
+    ],
+  };
+
+  new Chart(ctx, {
+    type: "doughnut",
+    data: data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      events: [],
+      plugins: {
+        legend: {
+          display: false,
+          position: "top",
+        },
+      },
+    },
+  });
+});
