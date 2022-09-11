@@ -219,6 +219,10 @@ function csvParseTotalCountries(csvFile) {
     var ctx = document.getElementById("myChartCountries").getContext("2d");
     const randomColours = generateRandomLightColours(x[0].length);
 
+    // Gets rid of placeholder for countries graph
+    document.getElementById("placeholder-countries").style.display = "none";
+    document.getElementById("myChartCountries").style.display = "block";
+
     // Canvas already in use fix
     let chartStatus = Chart.getChart("myChartCountries");
     if (chartStatus != undefined) {
@@ -330,6 +334,10 @@ function csvParseTotalInstallations(csvFile) {
     var ctx = document.getElementById("myChartInstallations").getContext("2d");
     const randomColours = generateRandomLightColours(x[0].length);
 
+    // Gets rid of placeholder for countries graph
+    document.getElementById("placeholder-installs").style.display = "none";
+    document.getElementById("myChartInstallations").style.display = "block";
+
     // Canvas already in use fix
     let chartStatus = Chart.getChart("myChartInstallations");
     if (chartStatus != undefined) {
@@ -406,6 +414,7 @@ function generateRandomLightColours(numberOfColours) {
   return x;
 }
 
+//Placeholder images for countries and installs graphs
 addEventListener("DOMContentLoaded", (event) => {
   const ctx = document
     .getElementById("placeholder-countries-image")
@@ -433,6 +442,43 @@ addEventListener("DOMContentLoaded", (event) => {
         legend: {
           display: false,
           position: "top",
+        },
+      },
+    },
+  });
+});
+
+addEventListener("DOMContentLoaded", (event) => {
+  const ctx1 = document
+    .getElementById("placeholder-installs-image")
+    .getContext("2d");
+  const data1 = {
+    labels: ["", "", "", "", "", ""],
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: [5, 10, 35, 20, 40, 45, 55],
+        borderColor: "rgb(220,220,220)",
+        tension: 0.1,
+      },
+    ],
+  };
+
+  new Chart(ctx1, {
+    type: "line",
+    data: data1,
+    options: {
+      events: [],
+      responsive: false,
+      plugins: {
+        legend: {
+          display: false,
+          position: "top",
+        },
+      },
+      scales: {
+        y: {
+          display: false,
         },
       },
     },

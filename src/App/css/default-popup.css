@@ -231,3 +231,21 @@ section {
   margin-right: 85px;
   margin-left: 85px;
 }
+
+#placeholder-countries-text {
+  position: absolute;
+  font-size: 23.5pt;
+  margin-top: 215px;
+  margin-left: 3px;
+}
+
+#placeholder-installs-image {
+  margin-top: 64.5px;
+}
+
+#placeholder-installs-text {
+  position: absolute;
+  font-size: 23.5pt;
+  margin-top: 150px;
+  margin-left: 71.5px;
+}
