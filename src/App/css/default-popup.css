@@ -237,6 +237,7 @@ section {
   font-size: 23.5pt;
   margin-top: 215px;
   margin-left: 3px;
+  font-weight: 300;
 }
 
 #placeholder-installs-image {
@@ -244,8 +245,9 @@ section {
 }
 
 #placeholder-installs-text {
-  position: absolute;
+  position: absolute !important;
   font-size: 23.5pt;
   margin-top: 150px;
   margin-left: 71.5px;
+  font-weight: 300;
 }

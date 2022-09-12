@@ -414,8 +414,8 @@ function generateRandomLightColours(numberOfColours) {
   return x;
 }
 
-//Placeholder images for countries and installs graphs
-addEventListener("DOMContentLoaded", (event) => {
+//Placeholder images for countries graph
+document.addEventListener("DOMContentLoaded", (event) => {
   const ctx = document
     .getElementById("placeholder-countries-image")
     .getContext("2d");
@@ -426,29 +426,47 @@ addEventListener("DOMContentLoaded", (event) => {
         data: [1, 2.5, 5],
         borderColor: ["white"],
         borderWidth: 2,
-        backgroundColor: ["rgb(220,220,220)"],
+        backgroundColor: ["rgb(224,224,224)"],
       },
     ],
   };
-
-  new Chart(ctx, {
+  let delayed;
+  let myChart = new Chart(ctx, {
     type: "doughnut",
     data: data,
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      events: [],
-      plugins: {
-        legend: {
-          display: false,
-          position: "top",
+      animation: {
+        delay: (context) => {
+          let delay = 0;
+          if (
+            context.type === "data" &&
+            context.mode === "default" &&
+            !delayed
+          ) {
+            delay = 8000;
+          }
+          return delay;
         },
+        loop: true,
       },
+      // responsive: true,
+      // maintainAspectRatio: false,
+      events: [],
+      // plugins: {
+      //   legend: {
+      //     display: false,
+      //     position: "top",
+      //   },
+      // },
     },
   });
+
+  myChart.options.animation.duration = 0;
+  myChart.update();
 });
 
-addEventListener("DOMContentLoaded", (event) => {
+// Placeholder images for installs graph
+document.addEventListener("DOMContentLoaded", (event) => {
   const ctx1 = document
     .getElementById("placeholder-installs-image")
     .getContext("2d");
@@ -457,8 +475,8 @@ addEventListener("DOMContentLoaded", (event) => {
     datasets: [
       {
         label: "My First Dataset",
-        data: [5, 10, 35, 20, 40, 45, 55],
-        borderColor: "rgb(220,220,220)",
+        data: [15, 17, 16, 19, 17, 17.5],
+        borderColor: "rgb(224,224,224)",
         tension: 0.1,
       },
     ],
@@ -468,6 +486,15 @@ addEventListener("DOMContentLoaded", (event) => {
     type: "line",
     data: data1,
     options: {
+      animations: {
+        tension: {
+          duration: 1000,
+          easing: "linear",
+          from: 1,
+          to: 0,
+          loop: true,
+        },
+      },
       events: [],
       responsive: false,
       plugins: {
