@@ -219,10 +219,6 @@ function csvParseTotalCountries(csvFile) {
     var ctx = document.getElementById("myChartCountries").getContext("2d");
     const randomColours = generateRandomLightColours(x[0].length);
 
-    // Gets rid of placeholder for countries graph
-    document.getElementById("placeholder-countries").style.display = "none";
-    document.getElementById("myChartCountries").style.display = "block";
-
     // Canvas already in use fix
     let chartStatus = Chart.getChart("myChartCountries");
     if (chartStatus != undefined) {
@@ -279,7 +275,16 @@ document
   .querySelector("#submit-countries")
   .addEventListener("click", function () {
     const csvFile = document.getElementById("countries-file");
-
+    // Input is empty (No file Choosen)
+    if (csvFile.value.length == 0) {
+      // Gets rid of placeholder for countries graph
+      document.getElementById("placeholder-countries").style.display = "block";
+      document.getElementById("myChartCountries").style.display = "none";
+    } else {
+      // Gets rid of placeholder for countries graph
+      document.getElementById("placeholder-countries").style.display = "none";
+      document.getElementById("myChartCountries").style.display = "block";
+    }
     csvParseTotalCountries(csvFile);
     // [{country: 'Canada', value: 101} ... {country: 'Malaysia', value: 21}]
   });
@@ -334,10 +339,6 @@ function csvParseTotalInstallations(csvFile) {
     var ctx = document.getElementById("myChartInstallations").getContext("2d");
     const randomColours = generateRandomLightColours(x[0].length);
 
-    // Gets rid of placeholder for countries graph
-    document.getElementById("placeholder-installs").style.display = "none";
-    document.getElementById("myChartInstallations").style.display = "block";
-
     // Canvas already in use fix
     let chartStatus = Chart.getChart("myChartInstallations");
     if (chartStatus != undefined) {
@@ -377,7 +378,15 @@ document
   .querySelector("#submit-installations")
   .addEventListener("click", function () {
     const csvFile = document.getElementById("installations-file");
-
+    if (csvFile.value.length == 0) {
+      // Gets rid of placeholder for countries graph
+      document.getElementById("placeholder-installs").style.display = "block";
+      document.getElementById("myChartInstallations").style.display = "none";
+    } else {
+      // Gets rid of placeholder for countries graph
+      document.getElementById("placeholder-installs").style.display = "none";
+      document.getElementById("myChartInstallations").style.display = "block";
+    }
     csvParseTotalInstallations(csvFile);
   });
 
@@ -443,10 +452,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
             context.mode === "default" &&
             !delayed
           ) {
-            delay = 8000;
+            delay = 5000;
           }
           return delay;
         },
+
         loop: true,
       },
       // responsive: true,
