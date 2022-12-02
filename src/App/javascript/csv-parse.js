@@ -4,10 +4,8 @@ import { uploadCheck, alertTimeout } from "./helper/helper-functions.js";
 // This should only contain the csv parse function
 // extract the queryselectors to their own files
 
-// document.querySelector('#submit-installations').addEventListener('click', csvParse);
-
 document
-  .querySelector("#Total-installs-container")
+  .querySelector("#Total-installs-button")
   .addEventListener("click", () => {
     document.getElementById("install-csv-upload").click();
   });
@@ -27,11 +25,18 @@ document.querySelector("#install-csv-upload").addEventListener("change", () => {
     alertTimeout("alert");
     return;
   } else {
+    document
+      .getElementById("Total-installs-container")
+      .style.setProperty("visibility", "hidden", "important");
+    document
+      .getElementById("calculated-total-container")
+      .style.setProperty("display", "block", "important");
     // Have check if they upload the same file! Using sessionStorage for checks
     if (sessionStorage.getItem("current-csv-name") === file) {
       // Show alert
       alert.style.opacity = 1;
-      alert.classList.add("alert-warning");
+      // alert.classList.add("alert-warning");
+      alert.classList.add("alert-success");
       alert.innerText = `${file} was just uploaded!`;
       alertTimeout("alert");
       document.getElementById("install-csv-upload").value = "";
@@ -80,15 +85,17 @@ function csvParseTotalInstalls(csvFile) {
       /*
         Once the reader loads a file successfully we then parse
       */
+
       const total_downloads = calculateTotal(reader.result, total);
-      const total_installs_container = document.getElementById(
-        "Total-installs-container"
-      );
-      total_installs_container.classList.add("total-installs-hidden");
+      // const total_installs_container = document.getElementById(
+      //   "Total-installs-container"
+      // );
+      // total_installs_container.classList.add("total-installs-hidden");
       /*
         Create the downloads text area div.
         If first time uploading.
       */
+
       if (document.getElementById("Total-installs-total-div") === null) {
         const total_div = document.createElement("div");
         total_div.innerText = total_downloads + " downloads";
@@ -103,26 +110,32 @@ function csvParseTotalInstalls(csvFile) {
           total_downloads + " downloads";
       }
 
+      document
+        .getElementById("clear-data-button")
+        .style.setProperty("display", "block", "important");
+      // document.getElementById("clear-data-button").classList.add("list-item");
       /*
         I don't know why adding classes with opacity changes did not do what
         the code below does. Wasted so much time on this.
       */
-      total_installs_container.addEventListener("mouseover", () => {
-        total_installs_container.style.opacity = 1;
-        document
-          .getElementById("calculated-total-container")
-          .addEventListener("mouseover", () => {
-            document.getElementById(
-              "calculated-total-container"
-            ).style.opacity = 0;
-            total_installs_container.style.opacity = 1;
-          });
-        document.getElementById("calculated-total-container").style.opacity = 0;
-      });
-      total_installs_container.addEventListener("mouseleave", () => {
-        total_installs_container.style.opacity = 0;
-        document.getElementById("calculated-total-container").style.opacity = 1;
-      });
+      // document.getElementById("Total-installs-button").visibility = hidden;
+
+      // total_installs_container.addEventListener("mouseover", () => {
+      //   total_installs_container.style.opacity = 1;
+      //   document
+      //     .getElementById("calculated-total-container")
+      //     .addEventListener("mouseover", () => {
+      //       document.getElementById(
+      //         "calculated-total-container"
+      //       ).style.opacity = 0;
+      //       total_installs_container.style.opacity = 1;
+      //     });
+      //   document.getElementById("calculated-total-container").style.opacity = 0;
+      // });
+      // total_installs_container.addEventListener("mouseleave", () => {
+      //   total_installs_container.style.opacity = 0;
+      //   document.getElementById("calculated-total-container").style.opacity = 1;
+      // });
 
       // Do animation with lines
       const lines = document.getElementsByClassName("line");
@@ -139,32 +152,14 @@ function csvParseTotalInstalls(csvFile) {
   }
 }
 
-// document
-//   .querySelector("#submit-countries")
-//   .addEventListener("click", function () {
-//     const csvFile = document.getElementById("countries-file");
-
-//     //selects the visualiser container page
-//     const ac = document.querySelector("#visualiser-container");
-//     const file = csvFile.files[0];
-
-//     const reader = new FileReader();
-
-//     reader.addEventListener(
-//       "load",
-//       () => {
-//         // this will then display a text file
-//         const result = document.createTextNode(reader.result);
-
-//         ac.appendChild(result);
-//       },
-//       false
-//     );
-
-//     if (file) {
-//       reader.readAsText(file);
-//     }
-//   });
+document.getElementById("clear-data-button").addEventListener("click", () => {
+  document
+    .getElementById("Total-installs-container")
+    .style.setProperty("visibility", "visible", "important");
+  document
+    .getElementById("calculated-total-container")
+    .style.setProperty("display", "none", "important");
+});
 
 function csvParseTotalCountries(csvFile) {
   function calculateTotal(string) {
@@ -628,4 +623,8 @@ document.querySelector("#countries-file").addEventListener("change", () => {
     document.getElementById("submit-countries").click();
     document.getElementById("submit-countries").setAttribute("disabled", true);
   }
+});
+
+document.querySelector("#visualiser-nav-btn").addEventListener("click", () => {
+  document.getElementById("alert").style.opacity = 0;
 });
