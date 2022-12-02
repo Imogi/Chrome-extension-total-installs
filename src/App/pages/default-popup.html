@@ -128,6 +128,7 @@
             class="btn btn-outline-secondary"
             type="button"
             id="submit-countries"
+            disabled
           >
             Visualise
           </button>
@@ -188,6 +189,7 @@
             class="btn btn-outline-secondary"
             type="button"
             id="submit-installations"
+            disabled
           >
             Visualise
           </button>
@@ -218,6 +220,17 @@
             style="display: none"
           ></canvas>
         </div>
+        <div
+          class="bg-light border"
+          id="chartDivInstallationsQuarters"
+          style="width: 100%; height: 500px; margin: 0 auto; display: none"
+        >
+        <canvas
+            id="myChartInstallationsQuarters"
+            width="100%"
+            height="100px"
+          ></canvas>
+        </div>
       </div>
       <div style="width: 50%; height: 20px; margin: 0 auto"></div>
     </div>
@@ -226,7 +239,7 @@
   <!-- Alerts -->
   <div class="alert" id="alert" role="alert" style="opacity: 0"></div>
 
-  <!-- JavaScript 
+  <!-- JavaScript
     We keep our js down here because if we put it in the header, the scripts
     will load before the rest of the documents will and hence won't be able
     to getElementById for example, as that element will not exist yet.
