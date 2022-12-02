@@ -2,8 +2,7 @@ body,
 section {
   width: 540px;
   height: 400px;
-  overflow: hidden !important;
-  margin: 0 !important;
+  overflow: hidden;
 }
 
 .container-fluid {
