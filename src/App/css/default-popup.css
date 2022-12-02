@@ -2,23 +2,20 @@ body,
 section {
   width: 540px;
   height: 400px;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden !important;
+  margin: 0 !important;
 }
 
 .container-fluid {
   /* background-color: #fbfbfb !important; */
   width: 100%;
   height: 100%;
+  justify-content: space-evenly !important;
 }
 
 #signin-container {
   background-color: beige !important;
 }
-
-/* .navbar-brand {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-} */
 
 /*
 	CSS for total install upload page
@@ -230,8 +227,8 @@ section {
 }
 
 .navbar .navbar-brand {
-  margin-right: 85px;
-  margin-left: 85px;
+  width: 240px !important;
+  cursor: pointer;
 }
 
 #placeholder-countries-text {
@@ -268,9 +265,60 @@ section {
 }
 
 #submit-countries:not([disabled]) {
-  background-color: rgb(5, 4, 153);
+  background-color: #0e475c;
 }
 
 #submit-installations:not([disabled]) {
-  background-color: rgb(5, 4, 153);
+  background-color: #0e475c;
+}
+
+#home-nav-btn {
+  border: 1px #D3D3D3 solid;
+  border-radius: 10px;
+  /* padding: 10px; */
+  padding: 20px;
+  text-align: center;
+}
+
+#visualiser-nav-btn {
+  border: 1px #D3D3D3 solid;
+  border-radius: 10px;
+  /* padding: 10px; */
+  padding: 20px;
+  text-align: center;
+}
+
+#countries-nav-btn {
+  color: black;
+}
+
+#installs-nav-btn {
+  color: black;
+}
+
+#home-nav-btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#visualiser-nav-btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.active{
+  background-color: #C8C8C8;
+}
+
+::-webkit-scrollbar {
+  width: 18px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #9eb2b9;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ccd9dd;
 }

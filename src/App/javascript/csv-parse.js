@@ -616,6 +616,7 @@ document.querySelector("#installations-file").addEventListener("change", () => {
   }
 });
 
+// Disabled button if has no input
 document.querySelector("#countries-file").addEventListener("change", () => {
   if (document.getElementById("countries-file").files.length !== 0) {
     document.getElementById("submit-countries").removeAttribute("disabled");
@@ -625,6 +626,17 @@ document.querySelector("#countries-file").addEventListener("change", () => {
   }
 });
 
+// Make home alert disappear if change to visualiser bar
 document.querySelector("#visualiser-nav-btn").addEventListener("click", () => {
   document.getElementById("alert").style.opacity = 0;
+});
+
+document.querySelector("#home-nav-btn").addEventListener("click", () => {
+  document.getElementById("home-nav-btn").classList.add("active");
+  document.getElementById("visualiser-nav-btn").classList.remove("active");
+});
+
+document.querySelector("#visualiser-nav-btn").addEventListener("click", () => {
+  document.getElementById("visualiser-nav-btn").classList.add("active");
+  document.getElementById("home-nav-btn").classList.remove("active");
 });

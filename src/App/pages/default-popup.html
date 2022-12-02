@@ -18,7 +18,7 @@
   <body>
     <nav class="navbar navbar-light bg-light border lead" id="main-navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" id="home-nav-btn" href="#">
+        <div class="navbar-brand active" id="home-nav-btn" href="#">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -38,9 +38,9 @@
           </svg>
 
           Home
-        </a>
+        </div>
 
-        <a class="navbar-brand" id="visualiser-nav-btn" href="#">
+        <div class="navbar-brand" id="visualiser-nav-btn" href="#">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -55,7 +55,7 @@
             />
           </svg>
           Visualiser
-        </a>
+        </div>
       </div>
     </nav>
   </body>
@@ -94,6 +94,7 @@
     <div style="width: 50%; height: 64px; margin: 0 auto"></div>
   </div>
   <!-- Visualiser container -->
+
   <div class="container-fluid" id="visualiser-container" style="display: none">
     <div id="chartDiv" style="width: 50%; height: 10px; margin: 0 auto"></div>
     <!-- Sub navbar-->
@@ -111,7 +112,6 @@
       >
     </nav>
     <!-- Visualiser sub navbar Countries-->
-
     <div class="container-fluid" id="countries-container" style="display: none">
       <div style="width: 50%; height: 10px; margin: 0 auto"></div>
       <div class="d-grid gap-2">
