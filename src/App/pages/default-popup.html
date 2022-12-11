@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Chrome extension stats</title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- Our own style sheet -->
     <link href="/App/css/default-popup.css" rel="stylesheet" />
     <!-- BootStrap style sheet -->
@@ -16,9 +16,9 @@
 
   <!-- Navigation bar -->
   <body>
-    <nav class="navbar navbar-light bg-light border lead" id="main-navbar">
+    <nav class="navbar navbar-light bg-light border lead fixed-top" id="main-navbar">
       <div class="container-fluid">
-        <div class="navbar-brand active" id="home-nav-btn" href="#">
+        <div class="active" id="home-nav-btn" href="#">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -40,7 +40,7 @@
           Home
         </div>
 
-        <div class="navbar-brand" id="visualiser-nav-btn" href="#">
+        <div class="" id="visualiser-nav-btn" href="#">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -94,151 +94,151 @@
     <div style="width: 50%; height: 64px; margin: 0 auto"></div>
   </div>
   <!-- Visualiser container -->
+  <div class="custom-navbar">
+    <div class="container-fluid" id="visualiser-container" style="display: none">
+      <div id="chartDiv" style="width: 50%; height: 10px; margin: 0 auto"></div>
+      <!-- Sub navbar-->
+      <nav class="nav nav-tabs nav-fill bg-light">
+        <a
+          class="nav-link active"
+          id="countries-nav-btn"
+          aria-current="page"
+          aria-selected="true"
+          href="#"
+          >Countries</a
+        >
+        <a class="nav-link" id="installs-nav-btn" aria-selected="false" href="#"
+          >Installations</a
+        >
+      </nav>
+      <!-- Visualiser sub navbar Countries-->
+      <div class="container-fluid" id="countries-container" style="display: none">
+        <div style="width: 50%; height: 10px; margin: 0 auto"></div>
+        <div class="d-grid gap-2">
+          <!--
+          <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button" >
+            Upload csv All Countries
+          </button>-->
 
-  <div class="container-fluid" id="visualiser-container" style="display: none">
-    <div id="chartDiv" style="width: 50%; height: 10px; margin: 0 auto"></div>
-    <!-- Sub navbar-->
-    <nav class="nav nav-tabs nav-fill bg-light">
-      <a
-        class="nav-link active"
-        id="countries-nav-btn"
-        aria-current="page"
-        aria-selected="true"
-        href="#"
-        >Countries</a
+          <div class="input-group">
+            <input
+              type="file"
+              accept=".csv"
+              class="form-control"
+              id="countries-file"
+            />
+            <button
+              class="btn btn-secondary"
+              type="button"
+              id="submit-countries"
+              disabled
+            >
+              Visualise
+            </button>
+          </div>
+
+          <div
+            class="bg-light border"
+            id="chartDivCountries"
+            style="width: 100%; height: 530px; margin: 0 auto"
+          >
+            <div
+              id="placeholder-countries"
+              style="width: 72%; height: 400px; margin: 0 auto; display: block"
+            >
+              <p class="lead" id="placeholder-countries-text">
+                No data for current period
+              </p>
+
+              <div style="width: 50%; height: 60px; margin: 0 auto"></div>
+              <canvas
+                id="placeholder-countries-image"
+                width="100%"
+                height="500px"
+              ></canvas>
+            </div>
+            <canvas
+              id="myChartCountries"
+              width="100%"
+              height="500px"
+              style="display: none"
+            ></canvas>
+          </div>
+
+          <div style="width: 50%; height: 20px; margin: 0 auto"></div>
+        </div>
+      </div>
+      <!-- Visualiser sub navbar Installations-->
+      <div
+        class="container-fluid"
+        id="installation-container"
+        style="display: none"
       >
-      <a class="nav-link" id="installs-nav-btn" aria-selected="false" href="#"
-        >Installations</a
-      >
-    </nav>
-    <!-- Visualiser sub navbar Countries-->
-    <div class="container-fluid" id="countries-container" style="display: none">
-      <div style="width: 50%; height: 10px; margin: 0 auto"></div>
-      <div class="d-grid gap-2">
-        <!--
+        <div style="width: 50%; height: 10px; margin: 0 auto"></div>
+        <div class="d-grid gap-2">
+          <!--
         <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button" >
           Upload csv All Countries
         </button>-->
 
-        <div class="input-group">
-          <input
-            type="file"
-            accept=".csv"
-            class="form-control"
-            id="countries-file"
-          />
-          <button
-            class="btn btn-secondary"
-            type="button"
-            id="submit-countries"
-            disabled
-          >
-            Visualise
-          </button>
-        </div>
+          <div class="input-group">
+            <input
+              type="file"
+              accept=".csv"
+              class="form-control"
+              id="installations-file"
+            />
+            <button
+              class="btn btn-secondary"
+              type="button"
+              id="submit-installations"
+              disabled
+            >
+              Visualise
+            </button>
+          </div>
 
-        <div
-          class="bg-light border"
-          id="chartDivCountries"
-          style="width: 100%; height: 530px; margin: 0 auto"
-        >
           <div
-            id="placeholder-countries"
-            style="width: 72%; height: 400px; margin: 0 auto; display: block"
+            class="bg-light border"
+            id="chartDivInstallations"
+            style="width: 100%; height: 500px; margin: 0 auto"
           >
-            <p class="lead" id="placeholder-countries-text">
-              No data for current period
-            </p>
-
-            <div style="width: 50%; height: 60px; margin: 0 auto"></div>
+            <div
+              id="placeholder-installs"
+              style="width: 100%; height: 400px; margin: 0 auto; display: block"
+            >
+              <p class="lead" id="placeholder-installs-text">
+                No data for current period
+              </p>
+              <canvas
+                id="placeholder-installs-image"
+                width="490px"
+                height="400px"
+              ></canvas>
+            </div>
             <canvas
-              id="placeholder-countries-image"
+              id="myChartInstallations"
               width="100%"
-              height="500px"
+              height="100px"
+              style="display: none"
             ></canvas>
           </div>
+          <div
+            class="bg-light border"
+            id="chartDivInstallationsQuarters"
+            style="width: 100%; height: 500px; margin: 0 auto; display: none"
+          >
           <canvas
-            id="myChartCountries"
-            width="100%"
-            height="500px"
-            style="display: none"
-          ></canvas>
+              id="myChartInstallationsQuarters"
+              width="100%"
+              height="100px"
+            ></canvas>
+          </div>
         </div>
-
         <div style="width: 50%; height: 20px; margin: 0 auto"></div>
       </div>
     </div>
-    <!-- Visualiser sub navbar Installations-->
-    <div
-      class="container-fluid"
-      id="installation-container"
-      style="display: none"
-    >
-      <div style="width: 50%; height: 10px; margin: 0 auto"></div>
-      <div class="d-grid gap-2">
-        <!--
-      <button class="btn btn-outline-primary" id="csv-countries-button-click" type="button" >
-        Upload csv All Countries
-      </button>-->
-
-        <div class="input-group">
-          <input
-            type="file"
-            accept=".csv"
-            class="form-control"
-            id="installations-file"
-          />
-          <button
-            class="btn btn-secondary"
-            type="button"
-            id="submit-installations"
-            disabled
-          >
-            Visualise
-          </button>
-        </div>
-
-        <div
-          class="bg-light border"
-          id="chartDivInstallations"
-          style="width: 100%; height: 500px; margin: 0 auto"
-        >
-          <div
-            id="placeholder-installs"
-            style="width: 100%; height: 400px; margin: 0 auto; display: block"
-          >
-            <p class="lead" id="placeholder-installs-text">
-              No data for current period
-            </p>
-            <canvas
-              id="placeholder-installs-image"
-              width="490px"
-              height="400px"
-            ></canvas>
-          </div>
-          <canvas
-            id="myChartInstallations"
-            width="100%"
-            height="100px"
-            style="display: none"
-          ></canvas>
-        </div>
-        <div
-          class="bg-light border"
-          id="chartDivInstallationsQuarters"
-          style="width: 100%; height: 500px; margin: 0 auto; display: none"
-        >
-        <canvas
-            id="myChartInstallationsQuarters"
-            width="100%"
-            height="100px"
-          ></canvas>
-        </div>
-      </div>
-      <div style="width: 50%; height: 20px; margin: 0 auto"></div>
-    </div>
   </div>
-
   <!-- Alerts -->
   <div class="alert" id="alert" role="alert" style="opacity: 0"></div>
 

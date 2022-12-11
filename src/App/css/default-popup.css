@@ -21,7 +21,17 @@ section {
 */
 #home-container {
   background-color: rgb(255, 255, 255) !important;
+  margin-top: 100px;
 }
+
+#visualiser-container{
+  margin-top: 90px;
+}
+
+#countries-container{
+  /* overflow: auto; */
+}
+
 #Total-installs-container {
   /* background-color: #547ebf; */
   margin: auto;
@@ -109,7 +119,7 @@ section {
 }
 .line1 {
   transform: rotate(330deg);
-  top: 43.1%;
+  top: 43.9%;
   left: 35%;
   background-color: #0b9e58;
 }
@@ -138,7 +148,7 @@ section {
 }
 @keyframes slide2 {
   to {
-    left: 14.6%;
+    left: 14.7%;
     border-radius: 0px;
     top: 54%;
     width: 122px;
@@ -161,12 +171,12 @@ section {
     transform: rotate(180deg);
     left: 25%;
     border-radius: 0px;
-    top: 65%;
+    top: 63.9%;
   }
 }
 .line4 {
   transform: rotate(330deg);
-  top: 47%;
+  top: 37%;
   right: 35%;
   background-color: #fecd43;
 }
@@ -179,7 +189,7 @@ section {
     transform: rotate(180deg);
     right: 25%;
     border-radius: 0px;
-    top: 43.1%;
+    top: 43.9%;
   }
 }
 .line5 {
@@ -197,7 +207,7 @@ section {
     transform: rotate(180deg);
     right: 25%;
     border-radius: 0px;
-    top: 65%;
+    top: 63.9%;
     width: 150px;
   }
 }
@@ -223,11 +233,6 @@ section {
 .visible {
   opacity: 1;
   max-height: 1000px;
-}
-
-.navbar .navbar-brand {
-  width: 240px !important;
-  cursor: pointer;
 }
 
 #placeholder-countries-text {
@@ -274,9 +279,11 @@ section {
 #home-nav-btn {
   border: 1px #D3D3D3 solid;
   border-radius: 10px;
-  /* padding: 10px; */
   padding: 20px;
   text-align: center;
+  /* margin-right: 0 !important; */
+  width: 240px;
+  cursor: pointer;
 }
 
 #visualiser-nav-btn {
@@ -285,7 +292,10 @@ section {
   /* padding: 10px; */
   padding: 20px;
   text-align: center;
+  width: 240px;
+  cursor: pointer;
 }
+
 
 #countries-nav-btn {
   color: black;
@@ -307,7 +317,11 @@ section {
   background-color: #C8C8C8;
 }
 
-::-webkit-scrollbar {
+#main-navbar {
+
+}
+
+/* ::-webkit-scrollbar {
   width: 18px;
 }
 
@@ -320,4 +334,4 @@ section {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #ccd9dd;
-}
+} */
