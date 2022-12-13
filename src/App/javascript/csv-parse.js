@@ -277,6 +277,7 @@ document
       document.getElementById("myChartCountries").style.display = "none";
     } else {
       // Gets rid of placeholder for countries graph
+      window.scrollTo(0, 105);
       document.getElementById("placeholder-countries").style.display = "none";
       document.getElementById("myChartCountries").style.display = "block";
     }
@@ -454,14 +455,15 @@ document
   .querySelector("#submit-installations")
   .addEventListener("click", function () {
     const csvFile = document.getElementById("installations-file");
+    // Input is empty (No file Choosen)
     if (csvFile.value.length == 0) {
-      // Gets rid of placeholder for countries graph
       document.getElementById("placeholder-installs").style.display = "block";
       document.getElementById("myChartInstallations").style.display = "none";
       document.getElementById("chartDivInstallationsQuarters").style.display =
         "none";
     } else {
-      // Gets rid of placeholder for countries graph
+      // Gets rid of placeholder for installations graph
+      window.scrollTo(0, 105);
       document.getElementById("placeholder-installs").style.display = "none";
       document.getElementById("myChartInstallations").style.display = "block";
       document.getElementById("chartDivInstallationsQuarters").style.display =
