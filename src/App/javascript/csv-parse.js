@@ -164,7 +164,6 @@ document.getElementById("clear-data-button").addEventListener("click", () => {
 function csvParseTotalCountries(csvFile) {
   function calculateTotal(string) {
     /*finds all countries and puts them into an array*/
-    // console.log(string);
     let countriesArray = string.split("\n")[1].split(",");
     // Removes first element from array
     countriesArray.shift();
@@ -208,8 +207,15 @@ function csvParseTotalCountries(csvFile) {
       Once the reader loads a file successfully we then parse
     */
     let x = calculateTotal(reader.result);
-
-    displayGraphCountries();
+    if (
+      checkGraphCountriesValidation(reader.result.split("\n")[0].split(",")[0])
+    ) {
+      displayGraphCountries();
+    } else {
+      document.getElementById("placeholder-countries").style.display = "block";
+      document.getElementById("myChartCountries").style.display = "none";
+      return;
+    }
 
     let ctx = document.getElementById("myChartCountries").getContext("2d");
     const randomColours = generateRandomLightColours(x[0].length);
@@ -263,6 +269,8 @@ function csvParseTotalCountries(csvFile) {
         },
       },
     });
+    document.getElementById("placeholder-countries").style.display = "none";
+    document.getElementById("myChartCountries").style.display = "block";
   });
 }
 
@@ -272,17 +280,14 @@ document
     const csvFile = document.getElementById("countries-file");
     // Input is empty (No file Choosen)
     if (csvFile.value.length == 0) {
-      // Gets rid of placeholder for countries graph
       document.getElementById("placeholder-countries").style.display = "block";
       document.getElementById("myChartCountries").style.display = "none";
     } else {
       // Gets rid of placeholder for countries graph
       window.scrollTo(0, 105);
-      document.getElementById("placeholder-countries").style.display = "none";
-      document.getElementById("myChartCountries").style.display = "block";
+      csvParseTotalCountries(csvFile);
+      // [{country: 'Canada', value: 101} ... {country: 'Malaysia', value: 21}]
     }
-    csvParseTotalCountries(csvFile);
-    // [{country: 'Canada', value: 101} ... {country: 'Malaysia', value: 21}]
   });
 
 function csvParseTotalInstallations(csvFile) {
@@ -330,7 +335,19 @@ function csvParseTotalInstallations(csvFile) {
     */
 
     let x = calculateTotal(reader.result);
-    displayGraphInstallations();
+    if (
+      checkGraphInstallationsValidation(
+        reader.result.split("\n")[0].split(",")[0]
+      )
+    ) {
+      displayGraphInstallations();
+    } else {
+      document.getElementById("placeholder-installs").style.display = "block";
+      document.getElementById("myChartInstallations").style.display = "none";
+      document.getElementById("chartDivInstallationsQuarters").style.display =
+        "none";
+      return;
+    }
 
     let ctx = document.getElementById("myChartInstallations").getContext("2d");
     const randomColours = generateRandomLightColours(x[0].length);
@@ -448,6 +465,10 @@ function csvParseTotalInstallations(csvFile) {
         },
       },
     });
+    document.getElementById("placeholder-installs").style.display = "none";
+    document.getElementById("myChartInstallations").style.display = "block";
+    document.getElementById("chartDivInstallationsQuarters").style.display =
+      "block";
   });
 }
 
@@ -464,12 +485,8 @@ document
     } else {
       // Gets rid of placeholder for installations graph
       window.scrollTo(0, 105);
-      document.getElementById("placeholder-installs").style.display = "none";
-      document.getElementById("myChartInstallations").style.display = "block";
-      document.getElementById("chartDivInstallationsQuarters").style.display =
-        "block";
+      csvParseTotalInstallations(csvFile);
     }
-    csvParseTotalInstallations(csvFile);
   });
 
 // Helper functions
@@ -628,17 +645,64 @@ document.querySelector("#countries-file").addEventListener("change", () => {
   }
 });
 
-// Make home alert disappear if change to visualiser bar
-document.querySelector("#visualiser-nav-btn").addEventListener("click", () => {
-  document.getElementById("alert").style.opacity = 0;
-});
-
 document.querySelector("#home-nav-btn").addEventListener("click", () => {
   document.getElementById("home-nav-btn").classList.add("active");
   document.getElementById("visualiser-nav-btn").classList.remove("active");
+  // Make visualiser alert disappear if main nav tab changes
+  document.getElementById("alert").style.opacity = 0;
 });
 
 document.querySelector("#visualiser-nav-btn").addEventListener("click", () => {
   document.getElementById("visualiser-nav-btn").classList.add("active");
   document.getElementById("home-nav-btn").classList.remove("active");
+  // Make home alert disappear if main nav tab changes
+  document.getElementById("alert").style.opacity = 0;
 });
+
+document.querySelector("#countries-nav-btn").addEventListener("click", () => {
+  // Make countries alert disappear if subnav tab changes
+  document.getElementById("alert").style.opacity = 0;
+});
+
+document.querySelector("#installs-nav-btn").addEventListener("click", () => {
+  // Make total installations alert disappear if subnav tab changes
+  document.getElementById("alert").style.opacity = 0;
+});
+
+function checkGraphCountriesValidation(firstRowvalue) {
+  const alert = document.getElementById("alert");
+  // const csv = document.getElementById("countries-file");
+  // const fileName = csv.files[0].name;
+  if (firstRowvalue === "Totals By Breakout") {
+    return true;
+  } else if (firstRowvalue === "Totals") {
+    alert.style.opacity = 1;
+    alert.innerText = `The choosen file is a installations csv file. Please select the correct countries file or switch to the Total installations tab`;
+    alert.classList.add("alert-warning");
+    alertTimeout("alert");
+  } else {
+    alert.style.opacity = 1;
+    alert.innerText = `The choosen file is not in proper format of a countries csv file. Please select the correct file`;
+    alert.classList.add("alert-danger");
+    alertTimeout("alert");
+  }
+}
+
+function checkGraphInstallationsValidation(firstRowvalue) {
+  const alert = document.getElementById("alert");
+  // const csv = document.getElementById("installations-file");
+  // const fileName = csv.files[0].name;
+  if (firstRowvalue === "Totals") {
+    return true;
+  } else if (firstRowvalue === "Totals By Breakout") {
+    alert.style.opacity = 1;
+    alert.innerText = `The choosen file is a countries csv file. Please select the correct installations file or switch to the Countries tab`;
+    alert.classList.add("alert-warning");
+    alertTimeout("alert");
+  } else {
+    alert.style.opacity = 1;
+    alert.innerText = `The choosen file is not in proper format of a installations csv file. Please select the correct file`;
+    alert.classList.add("alert-danger");
+    alertTimeout("alert");
+  }
+}
