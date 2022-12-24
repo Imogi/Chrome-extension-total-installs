@@ -1,4 +1,4 @@
-<img src="src/App/assets/icons/total-chomr-installs-banner.png">
+<img src="src/App/assets/icons/total-chrome-installs-banner.png">
 # Chrome-extension-total-installs
 
 Chrome extension that checks total amount of installs for other chrome extension
