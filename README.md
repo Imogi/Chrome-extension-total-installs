@@ -1,4 +1,4 @@
-<img src="src/App/assets/icons/total-chrome-installs-bannerr.png" alt="readme banner" width="1000" height="200" >
+<img src="src/App/assets/icons/total-chrome-installs-bannerr-transformed.png" alt="readme banner" width="1000" height="200" >
 
 # Chrome-extension-total-installs
 
