@@ -2,14 +2,17 @@
 
 # Table of Contents
 
+<!-- - [How to Install](#how-to-install) -->
+
 - [Introduction](#introduction)
 - [Background and Motivation](#background-and-motivation)
-- [How to Install](#how-to-install)
 - [Programming languages and frameworks](#programming-languages-and-frameworks)
 - [Features](#features)
 - [Why few commits to master branch](#why-few-commits-to-master-branch)
 - [UI and UX Decisions](#ui-and-ux-decisions)
+- [Validation](#validation)
 - [Issues faced](#issues-faced)
+- [Manifest v3 installing external library issue](#manifest-v3-installing-external-library-issue)
 - [What we learnt](#what-we-learnt)
 - [License](#license)
 
@@ -25,11 +28,11 @@ Following the publishing of one of our developers Chrome extension (Spotto), it 
 
 As developers it is inconvenient to scroll through and analyse the statistics of each file. Due to this, it was in our interest to develop a Chrome extension that would be able to parse both aforementioned csv files, visualise them and display the statistics to be more easily understood for Chrome extension developers.
 
-<a name="how-to-install"></a>
+<!-- <a name="how-to-install"></a>
 
 ## How to Install
 
-TBD
+TBD -->
 
 <a name="programming-languages-and-frameworks"></a>
 
@@ -60,7 +63,7 @@ For user experience, alerts were put in place so that there is a more compelling
 
 ## Validation
 
-The alerts as previously mentioned work due to a validation step. This is crucial as we do not want to submit an invalid file when parsing. How the validation works is it reads lines of the csv file and responds accordingly if the csv file is in correct format. If it is, then it will continue accordingly. If not, an alert will be invoked and will appear on the screen for the user to see. The message of the alert will correspond to what file was submitted on which page. Once again, this is just so the user has a good user experience.
+The alerts as previously mentioned work due to a validation step. This is crucial as we do not want to submit an invalid file when parsing. How the validation works is it reads lines of the csv file and responds accordingly if the csv file is in correct format. If it is valid, then it will continue accordingly. If not, an alert will be invoked and will appear on the screen for the user to see. The message of the alert will correspond to what file was submitted on which page. Once again, this is just so the user has a good user experience.
 
 <a name="issues-faced"></a>
 
@@ -68,15 +71,23 @@ The alerts as previously mentioned work due to a validation step. This is crucia
 
 First issue faced was building and completing the overlay submission button with an animation on the home page. There were a lot of underlying bugs that appeared from developing this feature such as when hovering after submission, it flickers between the pre and post states of a valid submission. After many attempts of trying to fix this, we found that the animation code had to be refactored as well as adding a clear file button fixes all the issues resulting in perfect functionality of this feature.
 
-Issue installing an external library due to manifest v3
+<a name="manifest-v3-installing-external-library-issue"></a>
 
-- issue installing an external library due to manifest v3
-  --> <script src="/src/node_modules/chart.js/dist/chart.js"></script>
-  Top one would fail, I think it has something to do with path
-    <script src="../../node_modules/chart.js/dist/chart.js"></script>
-  This goes from current directory up. i.e knows its path
-  TBD
-  <a name="what-we-learnt"></a>
+## Manifest v3 installing external library issue
+
+When we tried to utilise the Chart.js library to display the graphs, it was found that manifest v3 did not allow the use of third-party libraries. This was a result from configuration changes from manifiest v2 to v3. As such, we had to find a wrap around to this problem since Chart.js was a crucial library that would help us build our features. After some discussion, it was decided it would be best to install the Chart.js as a package in the ‘node_modules’ folder and add it as a dependency. From this, the library was accessible from our JavaScript code.
+
+However, our next issue was that creating an instance Chart from the library would not work. Our first script tag was:
+
+<script src="/src/node_modules/chart.js/dist/chart.js"></script>
+
+This script tag would not work. We ran into a lot of circles trying to figure out the issue. Was it that the dependency was not installed correctly? Nope! It was that the path of the script tag to the module was incorrect. The new correct path of the script tag was:
+
+<script src="../../node_modules/chart.js/dist/chart.js"></script>
+
+We figured out that the path is supposed to be relative to where the module is in the directory. Using the ‘../’, this enabled us to correctly path the file to the module (through moving back two directory levels).
+
+<a name="what-we-learnt"></a>
 
 # What we learnt
 
