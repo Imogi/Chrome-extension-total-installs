@@ -79,11 +79,11 @@ When we tried to utilise the Chart.js library to display the graphs, it was foun
 
 However, our next issue was that creating an instance Chart from the library would not work. Our first script tag was:
 
-<script src="/src/node_modules/chart.js/dist/chart.js"></script>
+- <script src="/src/node_modules/chart.js/dist/chart.js"></script>
 
 This script tag would not work. We ran into a lot of circles trying to figure out the issue. Was it that the dependency was not installed correctly? Nope! It was that the path of the script tag to the module was incorrect. The new correct path of the script tag was:
 
-<script src="../../node_modules/chart.js/dist/chart.js"></script>
+- <script src="../../node_modules/chart.js/dist/chart.js"></script>
 
 We figured out that the path is supposed to be relative to where the module is in the directory. Using the ‘../’, this enabled us to correctly path the file to the module (through moving back two directory levels).
 
