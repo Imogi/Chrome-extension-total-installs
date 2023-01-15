@@ -1,6 +1,6 @@
 {
   "extName": {
     "message": "Total install for chrome extensions",
-    "description": "Chrome extension to check for total number of installations for other chrome extension and other visualiser features."
+    "description": "This extension allows Chrome extension developers to visualise statistics of their other chrome extensions."
   }
 }
